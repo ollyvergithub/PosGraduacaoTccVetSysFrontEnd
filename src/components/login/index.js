@@ -35,7 +35,7 @@ export const Login = () => {
 
             <FacebookLogin
                 textButton="LOGIN WITH FACEBOOK"
-                appId= "168270402707941"
+                appId= "747336750353989"
                 fields="name,email,picture"
                 callback={fbResponse}
             />
