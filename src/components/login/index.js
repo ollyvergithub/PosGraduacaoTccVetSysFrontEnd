@@ -31,7 +31,7 @@ export const Login = () => {
 
 
     const  handleSuccess = (response) =>{
-        console.log(response.status);
+        console.log(response);
     }
 
     const handleError = (error) => {
