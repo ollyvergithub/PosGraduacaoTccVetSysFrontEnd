@@ -60,7 +60,7 @@ export const Login = () => {
             <FacebookLogin
                 textButton="LOGIN WITH FACEBOOK"
                 appId= "747336750353989"
-                fields="name,email,picture"
+                fields="first_name,email,picture"
                 callback={fbResponse}
             />
             <br/>
