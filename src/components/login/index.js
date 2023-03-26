@@ -11,7 +11,7 @@ export const Login = () => {
     gapi.load("client:auth2", () => {
         gapi.client.init({
             clientId:
-                "869020177822-bkgv8tlknftrn6iqombglbh3quiipnir.apps.googleusercontent.com",
+                "801003636497-2f87lqbshb6hkoamupmcip193h4687pa.apps.googleusercontent.com",
             plugin_name: "chat",
         });
     });
@@ -68,7 +68,7 @@ export const Login = () => {
             <h1>LOGIN WITH GOOGLE</h1>
 
             <GoogleLogin
-                clientId="869020177822-bkgv8tlknftrn6iqombglbh3quiipnir.apps.googleusercontent.com"
+                clientId="801003636497-2f87lqbshb6hkoamupmcip193h4687pa.apps.googleusercontent.com"
                 buttonText="LOGIN WITH GOOGLE"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
