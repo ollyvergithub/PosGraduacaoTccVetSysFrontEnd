@@ -4,6 +4,8 @@ import googleLogin from "../../services/googleLogin";
 import fbLogin from "../../services/fbLogin";
 import { gapi } from "gapi-script";
 
+import { FacebookProvider, LoginButton } from 'react-facebook';
+
 
 export const Login = () => {
     gapi.load("client:auth2", () => {
@@ -28,8 +30,30 @@ export const Login = () => {
 
 
 
+    const  handleSuccess = (response) =>{
+        console.log(response.status);
+    }
+
+    const handleError = (error) => {
+        console.log(error);
+    }
+
+
     return (
         <div className="App">
+
+            <h1>LOGIN WITH FACEBOOK PROVIDER</h1>
+            <FacebookProvider appId="747336750353989">
+                <LoginButton
+                    scope="email"
+                    onError={handleError}
+                    onSuccess={handleSuccess}
+                >
+                    Login via Facebook
+                </LoginButton>
+            </FacebookProvider>
+
+
 
             <h1>LOGIN WITH FACEBOOK</h1>
 
