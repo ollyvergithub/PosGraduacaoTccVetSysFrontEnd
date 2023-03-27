@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Fragment, useCallback} from "react";
+import React, {useEffect, useState} from "react";
 import {getPacientes} from "../../services/pacientes/Pacientes.service";
 
 export const Lista = () =>{
