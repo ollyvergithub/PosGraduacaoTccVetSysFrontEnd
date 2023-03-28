@@ -27,7 +27,7 @@ export const Lista = () =>{
     }, [])
 
     return(
-        <>
+        <div className='container'>
             <h1>Lista de Pacientes</h1>
             {pacientes && pacientes.length > 0 ?
                 pacientes.map(paciente =>
@@ -35,7 +35,7 @@ export const Lista = () =>{
                 )
                 : <p>Nenhum paciente cadastrado aqui </p>
             }
-        </>
+        </div>
     )
 
 }

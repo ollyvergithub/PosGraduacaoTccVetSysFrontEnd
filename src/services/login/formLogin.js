@@ -1,16 +1,8 @@
 import api from "../api";
 import {authService} from "../auth.service";
 
-
 const authHeader = {
     'Content-Type': 'application/json'
-};
-
-const authHeaderAuthorization = {
-    headers: {
-        'Authorization': `Token ${localStorage.getItem('access_token')}`,
-        'Content-Type': 'application/json'
-    }
 };
 
 const formLogin = async (username, password)=>{
