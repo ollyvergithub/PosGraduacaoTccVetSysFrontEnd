@@ -1,4 +1,5 @@
 import api from "../api";
+import {authService} from "../auth.service";
 
 /**
  *
@@ -7,15 +8,19 @@ import api from "../api";
 
 
 const fbLogin = async (accesstoken) => {
-    console.log("XXXXXxx fbLogin accesstoken ", accesstoken);
-    let res = await api.post(
-        "/api/rest-auth/facebook/",
-        {
-            access_token : accesstoken,
+    try {
+        console.log("XXXXXxx fbLogin accesstoken ", accesstoken);
+        let data = (await api.post("/api/rest-auth/facebook/",{access_token : accesstoken}));
+        console.log("XXXXXxx fbLogin res ", data);
+        if (data && data.data && data.data.key){
+            await authService.gravaTokenLocalstorage(data.data.key)
+            await authService.gravaUsuarioLocalstorage(data.data.key)
         }
-    );
-    console.log("XXXXXxx fbLogin res ", res);
-    return await res.status;
+        return await data.status;
+    }catch (e) {
+        console.log("Erro ao efetuar login com Facebook ", e)
+    }
+
 };
 
 export default fbLogin;
