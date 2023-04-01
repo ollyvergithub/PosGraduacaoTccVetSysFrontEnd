@@ -1,11 +1,12 @@
 import {LoginForm} from "./LoginForm";
 import {LoginFacebook} from "./LoginFacebook";
+import {LoginContainer} from "./LoginContainer";
 
 export const Login = () => {
     return (
-        <div className='container'>
+        <LoginContainer>
             <LoginFacebook/>
             <LoginForm/>
-        </div>
+        </LoginContainer>
     );
 }

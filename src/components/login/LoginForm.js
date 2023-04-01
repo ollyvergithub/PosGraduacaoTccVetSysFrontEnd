@@ -11,16 +11,15 @@ export const LoginForm = () => {
     }
 
     return(
-        <div className="Auth-form-container">
-            <h1>LOGIN COM USUÁRIO E SENHA</h1>
+        <div className='text-center'>
+            <p><strong>Faça login com usuário e senha</strong></p>
             <form className="Auth-form" onSubmit={submit}>
                 <div className="Auth-form-content">
-                    <h3 className="Auth-form-title">Login</h3>
                     <div className="form-group mt-3">
-                        <label>Username</label>
+                        <label>Usuário</label>
                         <input
                             className="form-control mt-1"
-                            placeholder="Enter Username"
+                            placeholder="Entre com o usuário"
                             name='username'
                             type='text'
                             value={username}
@@ -29,24 +28,25 @@ export const LoginForm = () => {
                         />
                     </div>
                     <div className="form-group mt-3">
-                        <label>Password</label>
+                        <label>Senha</label>
                         <input
                             name='password'
                             type="text"
                             className="form-control mt-1"
-                            placeholder="Enter password"
+                            placeholder="Entre com a senha"
                             value={password}
                             required
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
                     <div className="d-grid gap-2 mt-3">
-                        <button type="submit" className="btn btn-primary">
-                            Submit
+                        <button type="submit" className="btn btn-success">
+                            Login
                         </button>
                     </div>
                 </div>
             </form>
         </div>
+
     )
 }
