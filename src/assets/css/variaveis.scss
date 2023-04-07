@@ -1,0 +1,17 @@
+// Cores
+
+$corBranco: #ffffff;
+$corFonte: #555555;
+$corBtnSuccess: #B4C408;
+$mainColor: #00585E;
+$whiteColor: #ffffff;
+$hoverBackgroundColor: #2B7D83;
+$verdeClaro: #B4C408;
+$verdeEscuro: #0C7441;
+
+// Fontes
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital@0;1&display=swap');
+
+@mixin roboto-sans {
+  font-family: 'PT Sans', sans-serif;
+}

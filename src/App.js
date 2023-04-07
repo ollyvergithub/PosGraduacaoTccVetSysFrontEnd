@@ -1,9 +1,9 @@
-import './App.css';
+import "./assets/css/styles.scss"
 import {Rotas} from "./rotas";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" id="main">
       <Rotas/>
     </div>
   );

@@ -1,0 +1,17 @@
+@import "../../assets/css/variaveis";
+.container-404{
+
+  .texto-404, .link-404{
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 140%;
+    color: $corFonte;
+  }
+
+  .link-404{
+    color: $verdeEscuro;
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+}

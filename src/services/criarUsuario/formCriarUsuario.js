@@ -16,15 +16,11 @@ const formCriarUsuario = async (username, password1, password2, email) => {
             password2: password2,
             email: email,
         };
-        debugger
         const data = (await api.post('/api/rest-auth/registration/', user, {}));
-        console.log("submit", data)
-        if (data && data.status === 204){
-            window.location.assign('/login')
-        }
-
+        return data
     }catch (e) {
         console.log("Erro ao criar usuário e senha ", e)
+        return e
     }
 }
 

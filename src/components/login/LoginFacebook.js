@@ -14,7 +14,7 @@ export const LoginFacebook = () => {
         let fbResponseService = await fbLogin(response.accessToken)
         console.log("fbResponse response", response);
         console.log("fbResponse fbResponse", fbResponseService);
-        if (response && response.status && response.status === 200) {
+        if (fbResponseService && fbResponseService === 200) {
             setShowExibeModalErro(false)
             window.location.assign('/')
         } else {

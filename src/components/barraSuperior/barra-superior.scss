@@ -1,0 +1,11 @@
+@import "../../assets/css/variaveis";
+
+.container-barra-superior{
+  background-color: #F7F7F7;
+  border-bottom: solid 1px #ECECEC;
+}
+
+.textos-barra-superior a{
+  color: $corFonte;
+  text-decoration: none;
+}
