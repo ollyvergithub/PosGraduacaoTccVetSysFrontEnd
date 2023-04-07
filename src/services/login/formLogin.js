@@ -12,13 +12,14 @@ const formLogin = async (username, password)=>{
             password: password
         };
         const data = (await api.post('/api/rest-auth/login/', user, authHeader));
-        console.log("submit", data)
         if (data && data.data && data.data.key){
             await authService.gravaTokenLocalstorage(data.data.key)
             await authService.gravaUsuarioLocalstorage(data.data.key)
         }
+        return data
     }catch (e) {
         console.log("Erro ao efetuar login com usuário e senha ", e)
+        return e
     }
 }
 
