@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.scss"
-import {PaginasContainer} from "../PaginasContainer";
+import {PaginasContainer} from "../paginasContainer";
 import ImgHome from "../../assets/img/img-home.png"
 
 

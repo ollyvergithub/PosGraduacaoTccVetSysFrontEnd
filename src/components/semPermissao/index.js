@@ -1,5 +1,5 @@
 import React from "react";
-import {PaginasContainer} from "../PaginasContainer";
+import {PaginasContainer} from "../paginasContainer";
 import Img404 from "../../assets/img/img-404.svg"
 
 export const SemPermissao = () => {

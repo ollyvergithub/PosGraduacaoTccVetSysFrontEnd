@@ -1,12 +1,4 @@
 import api from "../api";
-import {authService, TOKEN_ALIAS} from "../auth.service";
-
-const authHeader = {
-    headers: {
-        'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
-        'Content-Type': 'application/json'
-    }
-};
 
 const formCriarUsuario = async (username, password1, password2, email) => {
     try {

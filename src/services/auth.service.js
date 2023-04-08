@@ -7,15 +7,20 @@ const getDadosDoUsuarioLogado = () => {
     return JSON.parse(localStorage.getItem(DADOS_USUARIO_LOGADO_ALIAS));
 };
 
-const getPermissoes = (permissao) =>{
-
+const getPermissoes = (permissao="") =>{
     let tem_acesso = false
 
-    if (permissao && authService.isLoggedIn()){
-        let dados_do_usuario_logado = getDadosDoUsuarioLogado()
-        let permissoes = dados_do_usuario_logado.permissoes
-        tem_acesso = permissoes.find((item) => item === permissao);
-        return tem_acesso
+    // Verifica se usuario está logado
+    if (authService.isLoggedIn()){
+        // Verifica se alguma permissão foi requerida
+        if (permissao){
+            let dados_do_usuario_logado = getDadosDoUsuarioLogado()
+            let permissoes = dados_do_usuario_logado.permissoes
+            tem_acesso = permissoes.find((item) => item === permissao);
+            return tem_acesso
+        }else {
+            return true
+        }
     }
 };
 

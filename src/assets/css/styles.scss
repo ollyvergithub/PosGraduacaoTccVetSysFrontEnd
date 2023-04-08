@@ -31,19 +31,19 @@ body {
   }
 
   .btn-success {
-    background-color: $corBtnSuccess;
-    border-color: $corBtnSuccess;
+    background-color: $verdeEscuro;
+    border-color: $verdeEscuro;
   }
 
   .btn-outline-success {
-    border-color: $corBtnSuccess;
-    color: $corBtnSuccess;
+    border-color: $verdeEscuro;
+    color: $verdeEscuro;
   }
 
   .btn-outline-success:hover {
     color: #fff;
-    background-color: $corBtnSuccess;
-    border-color: $corBtnSuccess;
+    background-color: $verdeEscuro;
+    border-color: $verdeEscuro;
   }
 
   hr {
@@ -126,74 +126,55 @@ body {
   }
 
   .p-paginator-next {
-    height: 4em !important;
-    min-width: 4em !important;
+    height: 3em !important;
+    min-width: 3em !important;
   }
 
   .p-paginator-prev {
-    height: 4em !important;
-    min-width: 4em !important;
+    height: 3em !important;
+    min-width: 3em !important;
   }
 
   .p-paginator-page {
-    height: 4em !important;
-    min-width: 4em !important;
+    height: 3em !important;
+    min-width: 3em !important;
     border: 1px solid #dadada !important;
   }
 
   .p-highlight {
-    background-color: #00585e !important;
+    background-color: $verdeEscuro !important;
+    color: #ffffff !important;
   }
 
   .p-paginator-element {
     border: 1px solid #dadada !important;
+    color: $verdeEscuro;
+  }
+
+  .p-paginator-element .p-disabled{
+
   }
 
   /* DataTable PrimeReact */
   .p-datatable-thead > tr > th {
     text-align: left;
+    background-color: $cinzaCabecalhoTabelas;
   }
 
-  .datatable-footer-coad {
-    .p-datatable-footer {
-      background-color: #ffffff !important;
-      font-weight: normal !important;
-    }
+  .p-datatable .p-datatable-tbody > tr > td{
+    padding: 0.5rem 1rem
   }
 
-  .datatable-strapd-coad {
-    .p-datatable-tbody > tr:nth-child(even) {
-      background-color: transparent;
-    }
-  }
-
-  .p-datatable.p-datatable-hoverable-rows
-    .p-datatable-tbody
+  .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody
     > tr:not(.p-highlight):not(.p-highlight-contextmenu):hover {
     cursor: pointer;
     background-color: $hoverBackgroundColor;
     color: #ffffff !important;
   }
 
-  .p-datatable.p-datatable-hoverable-rows
-  .p-datatable-tbody
+  .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody
   > tr:not(.p-highlight):not(.p-highlight-contextmenu):hover span {
     color: #fff;
   }
-
-  .ptrf-despesa-status-ativo {
-    color: green;
-  }
-
-
-
-  .ptrf-despesa-status-inativo {
-    color: red;
-  }
 }
 
-.btn-sem-borda-fundo{
-  background-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-}
