@@ -8,6 +8,7 @@ import 'primeicons/primeicons.css';
 import {TopoComBotaoAdicionarRegistro} from "./TopoComBotaoAdicionarRegistro";
 import {Lista} from "./Lista";
 import {Filtros} from "./Filtros";
+import {toastCustom} from "../toastCustom";
 
 export const Pacientes = () => {
 
@@ -78,6 +79,7 @@ export const Pacientes = () => {
         try {
             setShowExibeModalExcluir(false)
             await deletePaciente(registroParaExcluir.uuid)
+            toastCustom.ToastCustomSuccess('Exclusão de paciente com sucesso.', 'O Paciente foi excluído com sucesso.')
             await buscarPacientes()
         }catch (e) {
             console.log("Erro ao apagar paciente ", e)

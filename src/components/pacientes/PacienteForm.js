@@ -11,6 +11,7 @@ import {UseRetornaPortes} from "../../hooks/UseRetornaPortes";
 import moment from "moment";
 import {patchPaciente, postPaciente, retrievePaciente} from "../../services/pacientes/Pacientes.service";
 import {trataNumericos} from "../../Utils";
+import {ModalSucesso} from "../modalBootstrap/ModalSucesso";
 
 export const PacienteForm = () => {
     let {uuid} = useParams();
@@ -30,6 +31,8 @@ export const PacienteForm = () => {
     }
 
     const [initalState, setInitalState] = useState(inital)
+    const [bloqueiaBtnSalvar, setBloqueiaBtnSalvar] = useState(false)
+    const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
 
     const carregaPaciente = useCallback(async () => {
         if (uuid){
@@ -47,6 +50,9 @@ export const PacienteForm = () => {
     const racas = UseRetornaRacas()
     const portes = UseRetornaPortes()
 
+    const getPath = () => {
+        window.location.assign('/pacientes')
+    }
     const handleSubmit = async (values) => {
 
         try {
@@ -65,13 +71,17 @@ export const PacienteForm = () => {
             const payload = {
                 ...values
             }
+            setShowExibeModalSucesso(true)
             if (uuid){
                 await patchPaciente(uuid, payload)
+                setBloqueiaBtnSalvar(true)
             }else {
                 await postPaciente(payload)
+                setBloqueiaBtnSalvar(true)
             }
-            window.location.assign('/pacientes')
         }catch (e) {
+            setBloqueiaBtnSalvar(false)
+            setShowExibeModalSucesso(false)
             console.log("Erro ao cadastrar paciente ", e)
         }
     }
@@ -161,7 +171,6 @@ export const PacienteForm = () => {
                                     <label htmlFor="peso" className="form-label">Peso</label>
                                     <input
                                         type="number"
-                                        //pattern="^\d*(\.\d{0,2})?$"
                                         step="0.01"
                                         name="peso"
                                         id='peso'
@@ -269,7 +278,7 @@ export const PacienteForm = () => {
                                     <Link to="/pacientes" state={{origem: 'edicao'}}>
                                         <button
                                             type="button"
-                                            disabled={isSubmitting}
+                                            disabled={isSubmitting || bloqueiaBtnSalvar}
                                             className="btn btn-outline-success me-2"
                                         >
                                             Voltar
@@ -278,13 +287,24 @@ export const PacienteForm = () => {
 
                                     <button
                                         type="submit"
-                                        disabled={isSubmitting}
+                                        disabled={isSubmitting || bloqueiaBtnSalvar}
                                         className="btn btn-success"
                                     >
                                         {uuid ? 'Editar' : 'Cadastrar'}
                                     </button>
                                 </div>
                             </div>
+
+                            <section>
+                                <ModalSucesso
+                                    show={showExibeModalSucesso}
+                                    handleClose={() => getPath()}
+                                    titulo={uuid ? "Paciente editado com sucesso" : "Paciente criado com sucesso"}
+                                    texto={uuid ? "O Paciente foi editado com sucesso." : "O Paciente foi criado com sucesso."}
+                                    primeiroBotaoTexto="Fechar"
+                                    primeiroBotaoCss="success"
+                                />
+                            </section>
                         </form>
                     )}
                 </Formik>
