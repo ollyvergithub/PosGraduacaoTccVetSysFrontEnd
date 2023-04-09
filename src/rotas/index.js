@@ -44,7 +44,7 @@ const routesConfig = [
     },
     {
         exact: true,
-        path: "/pacientes/",
+        path: "/pacientes",
         component: Pacientes,
         permissao: '',
     },
@@ -80,7 +80,7 @@ export const Rotas = () => {
             <Routes>
                 {routesConfig.map((value, key) =>
                     <Route
-                        key={key}sem-permissao
+                        key={key}
                         path={value.path}
                         element={
                             <RequireAuth permissao={value.permissao} redirectTo="/sem-permissao">

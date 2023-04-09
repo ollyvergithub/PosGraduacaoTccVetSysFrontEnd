@@ -29,3 +29,14 @@ export const numeroFormatado = (valor) => {
     numeroFormatado = numeroFormatado.replace(/R/, "").replace(/\$/, "");
     return (numeroFormatado)
 };
+
+export const trataNumericos = (valor) =>{
+
+    if (typeof (valor) === "string"){
+        return Number(valor.replace(/,/gi,'.'));
+
+    }else {
+
+        return valor
+    }
+}

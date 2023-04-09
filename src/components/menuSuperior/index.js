@@ -19,7 +19,7 @@ export const MenuSuperior = () => {
                     <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul className="navbar-nav mb-2 mb-lg-0 text-end">
                             <li className="nav-item">
-                                <Link className='nav-link cor-itens-menu' to='/pacientes/'>Pacientes</Link>
+                                <Link className='nav-link cor-itens-menu' to='/pacientes'>Pacientes</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

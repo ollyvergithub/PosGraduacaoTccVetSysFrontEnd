@@ -82,8 +82,8 @@ export const Lista = ({
                 >
                     <Column field='id' header='Id'/>
                     <Column field='nome' header='Nome'/>
-                    <Column field='especie.nome' header='Espécie'/>
-                    <Column field='raca.nome' header='Raça'/>
+                    <Column field='especie_detail.nome' header='Espécie'/>
+                    <Column field='raca_detail.nome' header='Raça'/>
                     <Column
                         field='data_nasc'
                         header='Data Nasc.'
@@ -94,7 +94,7 @@ export const Lista = ({
                         header='Peso'
                         body={pesoTemplate}
                     />
-                    <Column field='tutor.nome' header='Cliente'/>
+                    <Column field='tutor_detail.nome' header='Cliente'/>
                     <Column
                         field='editar'
                         header='Editar'

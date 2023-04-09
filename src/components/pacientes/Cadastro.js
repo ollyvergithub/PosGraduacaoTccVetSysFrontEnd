@@ -1,8 +1,8 @@
 import React from "react";
 import {PacienteForm} from "./PacienteForm";
 
-export const CadastroDePacientes = props => {
+export const CadastroDePacientes = () => {
     return (
-        <PacienteForm {...props}/>
+        <PacienteForm/>
     )
 }

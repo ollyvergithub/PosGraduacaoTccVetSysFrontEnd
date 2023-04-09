@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export const Filtros = ({clientes, especies, racas, buscarRegistros}) => {
+export const Filtros = ({clientes, especies, racas, buscarPacientes}) => {
 
     const initialState = {
         filtrar_por_nome: "",
@@ -20,14 +20,12 @@ export const Filtros = ({clientes, especies, racas, buscarRegistros}) => {
 
     const handleSubmitFiltros = async (event) => {
         event.preventDefault();
-        console.log("handleSubmitFiltros ", stateFiltros)
-        await buscarRegistros(stateFiltros.filtrar_por_nome, stateFiltros.filtrar_por_cliente, stateFiltros.filtrar_por_especie, stateFiltros.filtrar_por_raca)
+        await buscarPacientes(stateFiltros.filtrar_por_nome, stateFiltros.filtrar_por_cliente, stateFiltros.filtrar_por_especie, stateFiltros.filtrar_por_raca)
     }
 
     const limparFiltros = async () => {
-        console.log("limparFiltros ", stateFiltros)
         setStateFiltros(initialState)
-        await buscarRegistros()
+        await buscarPacientes()
     }
 
     return (
@@ -107,7 +105,6 @@ export const Filtros = ({clientes, especies, racas, buscarRegistros}) => {
                     >
                         Filtrar
                     </button>
-
                 </div>
             </div>
         </form>
