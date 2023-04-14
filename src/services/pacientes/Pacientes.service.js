@@ -39,3 +39,25 @@ export const getPortes = async () => {
     return (await api.get(`/api/portes/`, authHeader)).data
 };
 
+export const gerarRelatorioPdf = async () => {
+    return api
+        .get(`/api/pacientes/gerar-relatorio-pdf`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'relatorio-pacientes.pdf');
+            document.body.appendChild(link);
+            link.click();
+        }).catch(error => {
+            return error.response;
+        });
+};
+

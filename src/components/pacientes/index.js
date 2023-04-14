@@ -1,5 +1,11 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {deletePaciente, getEspecies, getPacientes, getRacas} from "../../services/pacientes/Pacientes.service";
+import {
+    deletePaciente,
+    gerarRelatorioPdf,
+    getEspecies,
+    getPacientes,
+    getRacas
+} from "../../services/pacientes/Pacientes.service";
 import {getClientes} from "../../services/clientes/Clientes.service";
 import {PaginasContainer} from "../paginasContainer";
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
@@ -91,10 +97,17 @@ export const Pacientes = () => {
         }
     }
 
+    const relatorioPdf = async () => {
+        await gerarRelatorioPdf();
+    };
+
+
     return (
         <PaginasContainer>
             <div className='container mb-3'>
-                <TopoComBotaoAdicionarRegistro/>
+                <TopoComBotaoAdicionarRegistro
+                    relatorioPdf={relatorioPdf}
+                />
                 <Filtros
                     clientes={clientes}
                     especies={especies}
