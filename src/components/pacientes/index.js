@@ -9,8 +9,13 @@ import {TopoComBotaoAdicionarRegistro} from "./TopoComBotaoAdicionarRegistro";
 import {Lista} from "./Lista";
 import {Filtros} from "./Filtros";
 import {toastCustom} from "../toastCustom";
+import {useParams} from "react-router-dom";
 
 export const Pacientes = () => {
+
+    let {uuid} = useParams();
+
+    console.log("XXXXXXXXXXXX PACIENTES uuid ", uuid)
 
     const [registros, setRegistros] = useState([])
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);

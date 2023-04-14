@@ -1,10 +1,14 @@
 import React from "react";
 import {PaginasContainer} from "../paginasContainer";
 import Img404 from "../../assets/img/img-404.svg"
+import {useNavigate} from "react-router-dom";
 
 export const SemPermissao = () => {
+
+    const navigate = useNavigate();
+
     const clickToLogin = () => {
-        return window.location.assign('/login/')
+        navigate("/login")
     };
 
     return(

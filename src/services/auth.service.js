@@ -21,6 +21,8 @@ const getPermissoes = (permissao="") =>{
         }else {
             return true
         }
+    }else {
+        return false
     }
 };
 

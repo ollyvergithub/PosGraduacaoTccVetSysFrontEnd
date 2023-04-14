@@ -18,7 +18,7 @@ export const Lista = ({
                           setShowExibeModalExcluir
                       }) => {
 
-    const rowsPerPage = 7;
+    const rowsPerPage = 2;
 
     const dataTemplate = (rowData) => {
         return dataFormatada(rowData.data_nasc)
@@ -107,7 +107,7 @@ export const Lista = ({
                     />
                 </DataTable>
                 :
-                <p>Nenhum paciente cadastrado aqui </p>
+                <p>Nenhum paciente encontrado</p>
             }
             <section>
                 <ModalConfirmaExclusao

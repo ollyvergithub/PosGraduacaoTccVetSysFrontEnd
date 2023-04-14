@@ -1,6 +1,6 @@
 import React from "react";
 import './login.scss'
-import LogoSusiVeterinaria from "../../assets/img/logo-susi-veterinaria.png"
+import LogoSusiVeterinaria from "../../assets/img/logo-vet-sys.png"
 
 export const LoginContainer = ({children}) => {
     return (

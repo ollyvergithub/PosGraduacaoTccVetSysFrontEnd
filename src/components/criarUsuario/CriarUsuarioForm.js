@@ -2,8 +2,11 @@ import React, {useState} from "react";
 import formCriarUsuario from "../../services/criarUsuario/formCriarUsuario";
 import Loading from "../loading";
 import {ModalErro} from "../modalBootstrap/ModalErro";
+import {useNavigate} from "react-router-dom";
 
 export const CriarUsuarioForm = () => {
+
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -19,7 +22,7 @@ export const CriarUsuarioForm = () => {
         console.log("submit", data)
         if (data && data.status === 204) {
             setShowExibeModalErro(false)
-            window.location.assign('/')
+            navigate("/login")
         } else {
             setShowExibeModalErro(true)
         }
@@ -88,7 +91,7 @@ export const CriarUsuarioForm = () => {
                             />
                         </div>
                         <div className="d-grid gap-2 mt-3">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-success">
                                 Criar usuário
                             </button>
                         </div>

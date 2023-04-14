@@ -2,8 +2,12 @@ import {useState} from "react";
 import formLogin from "../../services/login/formLogin";
 import {ModalErro} from "../modalBootstrap/ModalErro";
 import Loading from "../loading";
+import {useNavigate, Link} from "react-router-dom";
 
 export const LoginForm = () => {
+
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showExibeModalErro, setShowExibeModalErro] = useState(false);
@@ -16,7 +20,7 @@ export const LoginForm = () => {
         console.log("submit", data)
         if (data && data.status === 200) {
             setShowExibeModalErro(false)
-            window.location.assign('/')
+            navigate("/")
         } else {
             setShowExibeModalErro(true)
         }
@@ -33,7 +37,7 @@ export const LoginForm = () => {
                         marginBottom="0"
                     />
                 ) :
-                <div className='text-center'>
+                <div className='mb-5'>
                     <p><strong>Faça login com usuário e senha</strong></p>
                     <form className="Auth-form" onSubmit={submit}>
                         <div className="Auth-form-content">
@@ -68,6 +72,9 @@ export const LoginForm = () => {
                             </div>
                         </div>
                     </form>
+
+                    <p className='mt-3'>
+                        <strong><Link to='/criar-usuario'> Ou crie seu usuário </Link> </strong></p>
 
                     <section>
                         <ModalErro

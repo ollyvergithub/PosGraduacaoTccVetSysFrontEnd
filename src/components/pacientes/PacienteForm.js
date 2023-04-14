@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import {Formik} from 'formik';
 import {PaginasContainer} from "../paginasContainer";
 import {YupValidation} from "./YupValidation";
@@ -15,6 +15,7 @@ import {ModalSucesso} from "../modalBootstrap/ModalSucesso";
 
 export const PacienteForm = () => {
     let {uuid} = useParams();
+    const navigate = useNavigate();
 
     const inital = {
         cor: "",
@@ -51,7 +52,7 @@ export const PacienteForm = () => {
     const portes = UseRetornaPortes()
 
     const getPath = () => {
-        window.location.assign('/pacientes')
+        navigate("/pacientes")
     }
     const handleSubmit = async (values) => {
 

@@ -2,11 +2,14 @@ import React from "react";
 import {PaginasContainer} from "../paginasContainer";
 import "./pagina-404.scss"
 import Img404 from "../../assets/img/img-404.svg"
+import {useNavigate} from "react-router-dom";
 
 export const Pagina404 = () => {
 
+    const navigate = useNavigate();
+
     const clickToLogin = () =>{
-        return window.location.assign('/login')
+        navigate("/login")
     }
 
     return (
