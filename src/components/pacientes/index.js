@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {
-    deletePaciente,
+    deletePaciente, gerarEstatisticas,
     gerarRelatorioPdf,
     getEspecies,
     getPacientes,
@@ -16,6 +16,7 @@ import {Lista} from "./Lista";
 import {Filtros} from "./Filtros";
 import {toastCustom} from "../toastCustom";
 import {useParams} from "react-router-dom";
+import {ModalVisualizarEstatisticas} from "../modalBootstrap/ModalVisualizarEstatisticas";
 
 export const Pacientes = () => {
 
@@ -25,6 +26,7 @@ export const Pacientes = () => {
 
     const [registros, setRegistros] = useState([])
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);
+    const [showExibeModalEstatisticas, setShowExibeModalEstatisticas] = useState(false);
     const [registroParaExcluir, setRegistroParaExcluir] = useState({})
     const [clientes, setClientes] = useState([])
     const [especies, setEspecies] = useState([])
@@ -101,12 +103,16 @@ export const Pacientes = () => {
         await gerarRelatorioPdf();
     };
 
+    const estatisticas = async () => {
+        setShowExibeModalEstatisticas(true)
+    };
 
     return (
         <PaginasContainer>
             <div className='container mb-3'>
                 <TopoComBotaoAdicionarRegistro
                     relatorioPdf={relatorioPdf}
+                    estatisticas={estatisticas}
                 />
                 <Filtros
                     clientes={clientes}
@@ -121,6 +127,12 @@ export const Pacientes = () => {
                     showExibeModalExcluir={showExibeModalExcluir}
                     setShowExibeModalExcluir={setShowExibeModalExcluir}
                 />
+                <section>
+                    <ModalVisualizarEstatisticas
+                        show={showExibeModalEstatisticas}
+                        handleClose={()=>setShowExibeModalEstatisticas(false)}
+                    />
+                </section>
             </div>
         </PaginasContainer>
     )

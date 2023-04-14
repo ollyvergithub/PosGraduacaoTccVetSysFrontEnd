@@ -1,5 +1,6 @@
 import React, {Fragment} from "react";
 import {Button, Modal} from "react-bootstrap";
+import "./modais.css"
 
 export const ModalBootstrap = (propriedades) => {
     return (
@@ -47,6 +48,32 @@ export const ModalBootstrap = (propriedades) => {
                                 } </Button>
                         ) : null
                     } </Modal.Footer>
+            </Modal>
+        </Fragment>
+    )
+};
+
+export const ModalFormBody = (props) => {
+    return (
+        <Fragment>
+            <Modal centered
+                   show={
+                       props.show
+                   }
+                   onHide={
+                       props.onHide
+                   }
+                   size={
+                       props.size
+                   }>
+                <Modal.Header closeButton>
+                    <Modal.Title>{
+                        props.titulo
+                    }</Modal.Title>
+                </Modal.Header>
+                <Modal.Body> {
+                    props.bodyText
+                } </Modal.Body>
             </Modal>
         </Fragment>
     )

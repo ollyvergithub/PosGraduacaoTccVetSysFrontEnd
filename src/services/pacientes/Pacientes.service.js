@@ -61,3 +61,26 @@ export const gerarRelatorioPdf = async () => {
         });
 };
 
+export const gerarEstatisticas = async () => {
+    return api
+        .get(`/api/pacientes/gerar-estatisticas`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            //Create a Blob from the arquivo Stream
+            const file = new Blob([response.data], {type: response.data.type});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+            let objeto = document.querySelector( "#visualizar_estatistica" );
+            objeto.data = fileURL;
+        }).catch(error => {
+            return error.response;
+        })
+};
+
+
