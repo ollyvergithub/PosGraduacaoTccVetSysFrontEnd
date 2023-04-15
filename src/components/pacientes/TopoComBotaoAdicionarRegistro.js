@@ -7,20 +7,6 @@ export const TopoComBotaoAdicionarRegistro = ({relatorioPdf, estatisticas}) => {
             <div className="p-2 flex-grow-1 bd-highlight">
                 <h5 className='mb-0'>Lista de Pacientes</h5>
             </div>
-            <div>
-                <button
-                    onClick={relatorioPdf}
-                >
-                    <strong>Gerar Relatório em PDF</strong>
-                </button>
-            </div>
-            <div>
-                <button
-                    onClick={estatisticas}
-                >
-                    <strong>Gerar Estatísticas</strong>
-                </button>
-            </div>
             <div className="p-2 bd-highlight">
                 <Link
                     to={{
@@ -33,5 +19,4 @@ export const TopoComBotaoAdicionarRegistro = ({relatorioPdf, estatisticas}) => {
             </div>
         </div>
     )
-
 }

@@ -8,8 +8,8 @@ const authHeader = {
         'Content-Type': 'application/json'
     }
 };
-export const getPacientes = async (nome='', cliente_uuid, especie_uuid, raca_uuid) => {
-    return (await api.get(`/api/pacientes/?nome=${nome}${cliente_uuid ? '&cliente_uuid='+cliente_uuid : ''}${especie_uuid ? '&especie_uuid='+especie_uuid : ''}${raca_uuid ? '&raca_uuid='+raca_uuid : ''}`, authHeader)).data
+export const getPacientes = async (nome = '', cliente_uuid, especie_uuid, raca_uuid) => {
+    return (await api.get(`/api/pacientes/?nome=${nome}${cliente_uuid ? '&cliente_uuid=' + cliente_uuid : ''}${especie_uuid ? '&especie_uuid=' + especie_uuid : ''}${raca_uuid ? '&raca_uuid=' + raca_uuid : ''}`, authHeader)).data
 };
 
 export const retrievePaciente = async (paciente_uuid) => {
@@ -39,9 +39,10 @@ export const getPortes = async () => {
     return (await api.get(`/api/portes/`, authHeader)).data
 };
 
-export const gerarRelatorioPdf = async () => {
+export const gerarRelatorioPdf = async (payload) => {
+    console.log("CCCCCCCCCCCCCCCccc gerarRelatorioPdf payload ", payload)
     return api
-        .get(`/api/pacientes/gerar-relatorio-pdf`, {
+        .post(`/api/pacientes/gerar-relatorio-pdf/`, payload, {
             responseType: 'blob',
             timeout: 30000,
             headers: {
@@ -58,7 +59,7 @@ export const gerarRelatorioPdf = async () => {
             link.click();
         }).catch(error => {
             return error.response;
-        });
+        })
 };
 
 export const gerarEstatisticas = async () => {
@@ -76,8 +77,7 @@ export const gerarEstatisticas = async () => {
             const file = new Blob([response.data], {type: response.data.type});
             //Build a URL from the file
             const fileURL = URL.createObjectURL(file);
-            let objeto = document.querySelector( "#visualizar_estatistica" );
-            objeto.data = fileURL;
+            return fileURL
         }).catch(error => {
             return error.response;
         })

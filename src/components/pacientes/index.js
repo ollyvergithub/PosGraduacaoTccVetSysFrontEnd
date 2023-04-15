@@ -16,7 +16,10 @@ import {Lista} from "./Lista";
 import {Filtros} from "./Filtros";
 import {toastCustom} from "../toastCustom";
 import {useParams} from "react-router-dom";
-import {ModalVisualizarEstatisticas} from "../modalBootstrap/ModalVisualizarEstatisticas";
+import {Lightbox} from "react-modal-image";
+import {Relatorio} from "./Relatorio";
+import {Estatisticas} from "./Estatistica";
+import Loading from "../loading";
 
 export const Pacientes = () => {
 
@@ -27,12 +30,14 @@ export const Pacientes = () => {
     const [registros, setRegistros] = useState([])
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);
     const [showExibeModalEstatisticas, setShowExibeModalEstatisticas] = useState(false);
+    const [urlImgEstatisticas, setUrlImgEstatisticas] = useState('');
     const [registroParaExcluir, setRegistroParaExcluir] = useState({})
     const [clientes, setClientes] = useState([])
     const [especies, setEspecies] = useState([])
     const [racas, setRacas] = useState([])
+    const [loading, setLoading] = useState(false);
 
-    const buscarPacientes = useCallback(async (nome='', cliente_uuid='', especie_uuid='', raca_uuid='') => {
+    const buscarPacientes = useCallback(async (nome = '', cliente_uuid = '', especie_uuid = '', raca_uuid = '') => {
         const registros = await getPacientes(nome ? nome : '', cliente_uuid, especie_uuid, raca_uuid)
         setRegistros(registros)
     }, [])
@@ -47,7 +52,7 @@ export const Pacientes = () => {
     }, [buscarPacientes])
 
     const buscaClientes = useCallback(async () => {
-        let clientes =  await getClientes()
+        let clientes = await getClientes()
         setClientes(clientes)
     }, [])
 
@@ -61,7 +66,7 @@ export const Pacientes = () => {
     }, [buscaClientes])
 
     const buscaEspecies = useCallback(async () => {
-        let especies =  await getEspecies()
+        let especies = await getEspecies()
         setEspecies(especies)
     }, [])
 
@@ -75,7 +80,7 @@ export const Pacientes = () => {
     }, [buscaEspecies])
 
     const buscaRacas = useCallback(async () => {
-        let racas =  await getRacas()
+        let racas = await getRacas()
         setRacas(racas)
     }, [])
 
@@ -94,46 +99,84 @@ export const Pacientes = () => {
             await deletePaciente(registroParaExcluir.uuid)
             toastCustom.ToastCustomSuccess('Exclusão de paciente com sucesso.', 'O Paciente foi excluído com sucesso.')
             await buscarPacientes()
-        }catch (e) {
+        } catch (e) {
             console.log("Erro ao apagar paciente ", e)
         }
     }
 
     const relatorioPdf = async () => {
-        await gerarRelatorioPdf();
+        try {
+            setLoading(true)
+            await gerarRelatorioPdf({
+                "uuids_pacientes": registros.map(lanc => lanc.uuid),
+            });
+            setLoading(false)
+        } catch (e) {
+            console.log("Erro ao gerar relatório ", e)
+        }
     };
 
     const estatisticas = async () => {
-        setShowExibeModalEstatisticas(true)
+        try {
+            setShowExibeModalEstatisticas(true)
+            let img = await gerarEstatisticas();
+            setUrlImgEstatisticas(img)
+        } catch (e) {
+            setShowExibeModalEstatisticas(false)
+            console.log("Erro ao gerar imagem de estatísticas ", e)
+        }
     };
 
     return (
         <PaginasContainer>
-            <div className='container mb-3'>
-                <TopoComBotaoAdicionarRegistro
-                    relatorioPdf={relatorioPdf}
-                    estatisticas={estatisticas}
-                />
-                <Filtros
-                    clientes={clientes}
-                    especies={especies}
-                    racas={racas}
-                    buscarPacientes={buscarPacientes}
-                />
-                <Lista
-                    registros={registros}
-                    excluirRegistro={excluirRegistro}
-                    setRegistroParaExcluir={setRegistroParaExcluir}
-                    showExibeModalExcluir={showExibeModalExcluir}
-                    setShowExibeModalExcluir={setShowExibeModalExcluir}
-                />
-                <section>
-                    <ModalVisualizarEstatisticas
-                        show={showExibeModalEstatisticas}
-                        handleClose={()=>setShowExibeModalEstatisticas(false)}
+
+            {loading ? (
+                    <Loading
+                        corGrafico="black"
+                        corFonte="dark"
+                        marginTop="0"
+                        marginBottom="0"
+                        texto='Relatório sendo gerado, aguarde...'
                     />
-                </section>
-            </div>
+                ) :
+                <div className='container mb-3'>
+                    <TopoComBotaoAdicionarRegistro
+                        relatorioPdf={relatorioPdf}
+                        estatisticas={estatisticas}
+                    />
+                    <Filtros
+                        clientes={clientes}
+                        especies={especies}
+                        racas={racas}
+                        buscarPacientes={buscarPacientes}
+                    />
+                    <Estatisticas
+                        estatisticas={estatisticas}
+                    />
+
+                    <Relatorio
+                        relatorioPdf={relatorioPdf}
+                    />
+
+                    <Lista
+                        registros={registros}
+                        excluirRegistro={excluirRegistro}
+                        setRegistroParaExcluir={setRegistroParaExcluir}
+                        showExibeModalExcluir={showExibeModalExcluir}
+                        setShowExibeModalExcluir={setShowExibeModalExcluir}
+                    />
+                    <section>
+                        {showExibeModalEstatisticas &&
+                            <Lightbox
+                                small={urlImgEstatisticas}
+                                large={urlImgEstatisticas}
+                                alt="Número de clientes cadastrados por mês (2023)"
+                                onClose={() => setShowExibeModalEstatisticas(false)}
+                            />
+                        }
+                    </section>
+                </div>
+            }
         </PaginasContainer>
     )
 }
