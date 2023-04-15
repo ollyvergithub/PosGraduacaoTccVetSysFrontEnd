@@ -20,7 +20,8 @@ export const LoginForm = () => {
         console.log("submit", data)
         if (data && data.status === 200) {
             setShowExibeModalErro(false)
-            navigate("/")
+            window.location.assign('/')
+            // navigate("/")
         } else {
             setShowExibeModalErro(true)
         }
