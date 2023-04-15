@@ -18,7 +18,6 @@ import {toastCustom} from "../toastCustom";
 import {useParams} from "react-router-dom";
 import {Lightbox} from "react-modal-image";
 import {Relatorio} from "./Relatorio";
-import {Estatisticas} from "./Estatistica";
 import Loading from "../loading";
 
 export const Pacientes = () => {
@@ -150,10 +149,6 @@ export const Pacientes = () => {
                         racas={racas}
                         buscarPacientes={buscarPacientes}
                     />
-                    <Estatisticas
-                        estatisticas={estatisticas}
-                    />
-
                     <Relatorio
                         relatorioPdf={relatorioPdf}
                     />

@@ -46,6 +46,21 @@ body {
     border-color: $verdeEscuro;
   }
 
+  .btn-sem-formatacao{
+    background: none;
+    border:none;
+  }
+
+  a.active {
+    background-color: #F7F7F7;
+    border-bottom: solid 3px $verdeClaro;
+  }
+
+  a.sem-formatacao {
+    background: none;
+    border-bottom: none;
+  }
+
   hr {
     margin-top: 1rem;
     border: 0;

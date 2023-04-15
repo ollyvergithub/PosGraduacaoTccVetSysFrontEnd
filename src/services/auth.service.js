@@ -52,10 +52,16 @@ const gravaUsuarioLocalstorage = async (token) => {
     }
 }
 
+const logout = () => {
+    localStorage.clear()
+    window.location.assign('/login')
+}
+
 
 export const authService = {
     gravaUsuarioLocalstorage,
     gravaTokenLocalstorage,
     isLoggedIn,
     getPermissoes,
+    logout,
 }

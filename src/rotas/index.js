@@ -7,66 +7,9 @@ import {Home} from "../components/home";
 import {SemPermissao} from "../components/semPermissao";
 import {Pagina404} from "../components/404";
 import {CadastroDePacientes} from "../components/pacientes/Cadastro";
-import {EdicaoDePacientes} from "../components/pacientes/Edicao";
 import {Pacientes} from "../components/pacientes";
+import {EstatisticasPacientes} from "../components/estatisticas/pacientes";
 
-
-const routesConfig = [
-    {
-        exact: true,
-        path: "/sem-permissao",
-        component: <SemPermissao/>,
-        permissao: '',
-    },
-    {
-        exact: true,
-        path: "/login",
-        component: <Login/>,
-        permissao: '',
-    },
-    {
-        exact: true,
-        path: "/",
-        component: <Home/>,
-        permissao: '',
-    },
-    {
-        exact: true,
-        path: "/criar-usuario",
-        component: <CriarUsuario/>,
-        permissao: '',
-    },
-    {
-        exact: true,
-        path: "*",
-        component: <Pagina404/>,
-        permissao: '',
-    },
-    {
-        exact: true,
-        path: "/pacientes",
-        component: <Pacientes/>,
-        permissao: '',
-    },
-    {
-        exact: true,
-        path: "/cadastro-de-paciente/",
-        component: <CadastroDePacientes/>,
-        permissoes: '',
-    },
-    {
-        exact: true,
-        path: "/edicao-de-paciente/:uuid",
-        component: <EdicaoDePacientes/>,
-        permissoes: '',
-    },
-    {
-        exact: true,
-        path: "/protected",
-        component: <Home/>,
-        permissao: 'add_emailaddresst',
-    },
-]
 
 export const Rotas = () => {
 
@@ -115,6 +58,14 @@ export const Rotas = () => {
                     element={
                         <PrivateRoute permissao=''  redirectTo="/sem-permissao">
                             <CadastroDePacientes />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/gerar-estatisticas-pacientes"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <EstatisticasPacientes />
                         </PrivateRoute>
                     }
                 />

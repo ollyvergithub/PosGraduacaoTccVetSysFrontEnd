@@ -2,11 +2,9 @@ import {useState} from "react";
 import formLogin from "../../services/login/formLogin";
 import {ModalErro} from "../modalBootstrap/ModalErro";
 import Loading from "../loading";
-import {useNavigate, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const LoginForm = () => {
-
-    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
