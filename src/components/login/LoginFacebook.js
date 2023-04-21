@@ -3,25 +3,27 @@ import fbLogin from "../../services/login/fbLogin";
 import {useState} from "react";
 import {ModalErro} from "../modalBootstrap/ModalErro";
 import Loading from "../loading";
+import {useNavigate} from "react-router-dom";
 
 export const LoginFacebook = () => {
+    const navigate = useNavigate();
 
     const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const fbResponse = async (response) => {
-        //setLoading(true)
+        setLoading(true)
         let fbResponseService = await fbLogin(response.accessToken)
         console.log("fbResponse response", response);
         console.log("fbResponse fbResponse", fbResponseService);
         if (fbResponseService && fbResponseService === 200) {
             setShowExibeModalErro(false)
-            window.location.assign('/')
-            //navigate("/")
+            //window.location.assign('/')
+            navigate("/")
         } else {
             setShowExibeModalErro(true)
         }
-        //setLoading(false)
+        setLoading(false)
     }
 
     return (
@@ -32,6 +34,7 @@ export const LoginFacebook = () => {
                         corFonte="dark"
                         marginTop="0"
                         marginBottom="0"
+                        texto="Aguarde o login..."
                     />
                 ) :
                 <div className='text-center pt-3 pb-5'>
