@@ -9,6 +9,9 @@ import {Pagina404} from "../components/404";
 import {CadastroDePacientes} from "../components/pacientes/Cadastro";
 import {Pacientes} from "../components/pacientes";
 import {EstatisticasPacientes} from "../components/estatisticas/pacientes";
+import {Clientes} from "../components/clientes";
+import {CadastroDeClientes} from "../components/clientes/Cadastro";
+import {EstatisticasClientes} from "../components/estatisticas/clientes";
 
 
 export const Rotas = () => {
@@ -66,6 +69,38 @@ export const Rotas = () => {
                     element={
                         <PrivateRoute permissao=''  redirectTo="/sem-permissao">
                             <EstatisticasPacientes />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/clientes/:uuid?"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <Clientes />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/cadastro-de-cliente"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <CadastroDeClientes />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/edicao-de-cliente/:uuid"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <CadastroDeClientes />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/gerar-estatisticas-clientes"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <EstatisticasClientes />
                         </PrivateRoute>
                     }
                 />

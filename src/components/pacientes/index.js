@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {
-    deletePaciente, gerarEstatisticas,
+    deletePaciente,
     gerarRelatorioPdf,
     getEspecies,
     getPacientes,
@@ -11,25 +11,17 @@ import {PaginasContainer} from "../paginasContainer";
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import {TopoComBotaoAdicionarRegistro} from "./TopoComBotaoAdicionarRegistro";
+import {TopoComBotaoAdicionarRegistro} from "../TopoComBotaoAdicionarRegistro";
 import {Lista} from "./Lista";
 import {Filtros} from "./Filtros";
 import {toastCustom} from "../toastCustom";
-import {useParams} from "react-router-dom";
-import {Lightbox} from "react-modal-image";
 import {Relatorio} from "./Relatorio";
 import Loading from "../loading";
 
 export const Pacientes = () => {
 
-    let {uuid} = useParams();
-
-    console.log("XXXXXXXXXXXX PACIENTES uuid ", uuid)
-
     const [registros, setRegistros] = useState([])
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);
-    const [showExibeModalEstatisticas, setShowExibeModalEstatisticas] = useState(false);
-    const [urlImgEstatisticas, setUrlImgEstatisticas] = useState('');
     const [registroParaExcluir, setRegistroParaExcluir] = useState({})
     const [clientes, setClientes] = useState([])
     const [especies, setEspecies] = useState([])
@@ -115,17 +107,6 @@ export const Pacientes = () => {
         }
     };
 
-    const estatisticas = async () => {
-        try {
-            setShowExibeModalEstatisticas(true)
-            let img = await gerarEstatisticas();
-            setUrlImgEstatisticas(img)
-        } catch (e) {
-            setShowExibeModalEstatisticas(false)
-            console.log("Erro ao gerar imagem de estatísticas ", e)
-        }
-    };
-
     return (
         <PaginasContainer>
 
@@ -140,8 +121,9 @@ export const Pacientes = () => {
                 ) :
                 <div className='container mb-3'>
                     <TopoComBotaoAdicionarRegistro
-                        relatorioPdf={relatorioPdf}
-                        estatisticas={estatisticas}
+                        titulo='Lista de pacientes'
+                        rota='/cadastro-de-paciente/'
+                        textoBotao='Adicionar novo paciente'
                     />
                     <Filtros
                         clientes={clientes}
@@ -151,6 +133,7 @@ export const Pacientes = () => {
                     />
                     <Relatorio
                         relatorioPdf={relatorioPdf}
+                        registros={registros}
                     />
 
                     <Lista
@@ -160,16 +143,6 @@ export const Pacientes = () => {
                         showExibeModalExcluir={showExibeModalExcluir}
                         setShowExibeModalExcluir={setShowExibeModalExcluir}
                     />
-                    <section>
-                        {showExibeModalEstatisticas &&
-                            <Lightbox
-                                small={urlImgEstatisticas}
-                                large={urlImgEstatisticas}
-                                alt="Número de clientes cadastrados por mês (2023)"
-                                onClose={() => setShowExibeModalEstatisticas(false)}
-                            />
-                        }
-                    </section>
                 </div>
             }
         </PaginasContainer>

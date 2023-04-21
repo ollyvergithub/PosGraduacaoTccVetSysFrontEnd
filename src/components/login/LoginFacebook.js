@@ -10,7 +10,7 @@ export const LoginFacebook = () => {
     const [loading, setLoading] = useState(false);
 
     const fbResponse = async (response) => {
-        setLoading(true)
+        //setLoading(true)
         let fbResponseService = await fbLogin(response.accessToken)
         console.log("fbResponse response", response);
         console.log("fbResponse fbResponse", fbResponseService);
@@ -21,7 +21,7 @@ export const LoginFacebook = () => {
         } else {
             setShowExibeModalErro(true)
         }
-        setLoading(false)
+        //setLoading(false)
     }
 
     return (

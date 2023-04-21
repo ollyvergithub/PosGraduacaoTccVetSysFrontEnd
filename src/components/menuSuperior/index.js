@@ -22,6 +22,9 @@ export const MenuSuperior = () => {
                             <li className="nav-item">
                                 <NavLink className='nav-link cor-itens-menu py-3' to='/pacientes'>Pacientes</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className='nav-link cor-itens-menu py-3' to='/clientes'>Clientes</NavLink>
+                            </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle cor-itens-menu py-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Estatísticas
@@ -29,11 +32,18 @@ export const MenuSuperior = () => {
                                 <ul className="dropdown-menu">
                                     <li className="nav-item">
                                         <NavLink
-                                            className='nav-link cor-itens-menu py-3'
+                                            className='cor-itens-menu dropdown-item'
                                             to='/gerar-estatisticas-pacientes'
                                             state={{ from: location.pathname }}
                                         >
                                             Pacientes
+                                        </NavLink>
+                                        <NavLink
+                                            className='cor-itens-menu dropdown-item'
+                                            to='/gerar-estatisticas-clientes'
+                                            state={{ from: location.pathname }}
+                                        >
+                                            Clientes
                                         </NavLink>
                                     </li>
                                     <li><Link className="dropdown-item" href="#">Another action</Link></li>
@@ -44,7 +54,7 @@ export const MenuSuperior = () => {
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <button  className='nav-link cor-itens-menu btn-sem-formatacao py-3' onClick={authService.logout}>Sair</button>
+                                <Link  className='nav-link cor-itens-menu btn-sem-formatacao py-3' onClick={authService.logout}>Sair</Link>
                             </li>
 
                         </ul>

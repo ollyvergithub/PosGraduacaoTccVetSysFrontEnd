@@ -12,7 +12,7 @@ export const LoginForm = () => {
     const [loading, setLoading] = useState(false);
 
     const submit = async e => {
-        setLoading(true)
+        //setLoading(true)
         e.preventDefault();
         let data = await formLogin(username, password)
         console.log("submit", data)
@@ -23,7 +23,7 @@ export const LoginForm = () => {
         } else {
             setShowExibeModalErro(true)
         }
-        setLoading(false)
+        //setLoading(false)
     }
 
     return (

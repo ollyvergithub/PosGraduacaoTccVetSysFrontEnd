@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {getClientes} from "../services/clientes/Clientes.service";
 import {getPacientes} from "../services/pacientes/Pacientes.service";
 
 export const UseRetornaPacientes = () => {

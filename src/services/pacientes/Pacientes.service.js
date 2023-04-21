@@ -40,7 +40,6 @@ export const getPortes = async () => {
 };
 
 export const gerarRelatorioPdf = async (payload) => {
-    console.log("CCCCCCCCCCCCCCCccc gerarRelatorioPdf payload ", payload)
     return api
         .post(`/api/pacientes/gerar-relatorio-pdf/`, payload, {
             responseType: 'blob',
