@@ -39,6 +39,8 @@ export const LoginFacebook = () => {
                         textButton="LOGIN COM FACEBOOK"
                         appId="747336750353989"
                         fields="name,email,picture"
+                        isMobile={false}
+                        redirectUri="https://vet-sys-app-ollyver.herokuapp.com/"
                         callback={fbResponse}
                     />
 
