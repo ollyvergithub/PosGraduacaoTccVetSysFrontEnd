@@ -200,6 +200,7 @@ export const ClienteForm = () => {
                                             id="sexo"
                                             className="form-select"
                                         >
+                                            <option value=''>Selecione o sexo</option>
                                             <option value='FEMININO'>Feminino</option>
                                             <option value='MASCULINO'>Masculino</option>
                                         </select>

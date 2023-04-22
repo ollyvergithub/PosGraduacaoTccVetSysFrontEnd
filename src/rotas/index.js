@@ -16,6 +16,8 @@ import {Funcionarios} from "../components/funcionarios";
 import {CadastroDeFuncionarios} from "../components/funcionarios/Cadastro";
 import {EdicaoDeFuncionarios} from "../components/funcionarios/Edicao";
 import {EdicaoDeClientes} from "../components/clientes/Edicao";
+import {Veterinarios} from "../components/veterinarios";
+import {CadastroDeVeterinarios} from "../components/veterinarios/Cadastro";
 
 
 export const Rotas = () => {
@@ -119,7 +121,7 @@ export const Rotas = () => {
                 <Route
                     path="/cadastro-de-funcionario"
                     element={
-                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                        <PrivateRoute permissao='acessar_funcionarios_administrativos'  redirectTo="/sem-permissao">
                             <CadastroDeFuncionarios />
                         </PrivateRoute>
                     }
@@ -127,8 +129,32 @@ export const Rotas = () => {
                 <Route
                     path="/edicao-de-funcionario/:uuid"
                     element={
-                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                        <PrivateRoute permissao='acessar_funcionarios_administrativos'  redirectTo="/sem-permissao">
                             <EdicaoDeFuncionarios />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/veterinarios"
+                    element={
+                        <PrivateRoute permissao='acessar_veterinarios'  redirectTo="/sem-permissao">
+                            <Veterinarios />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/cadastro-de-veterinario"
+                    element={
+                        <PrivateRoute permissao='acessar_veterinarios'  redirectTo="/sem-permissao">
+                            <CadastroDeVeterinarios />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/edicao-de-veterinario/:uuid"
+                    element={
+                        <PrivateRoute permissao='acessar_veterinarios'  redirectTo="/sem-permissao">
+                            <CadastroDeVeterinarios />
                         </PrivateRoute>
                     }
                 />

@@ -282,7 +282,7 @@ export const PacienteForm = () => {
                                             id="sexo"
                                             className="form-select"
                                         >
-                                            <option value=''>Selecione um sexo</option>
+                                            <option value=''>Selecione o sexo</option>
                                             <option value='MACHO'>Macho</option>
                                             <option value='FEMEA'>Fêmea</option>
 

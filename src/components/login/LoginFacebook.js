@@ -18,8 +18,8 @@ export const LoginFacebook = () => {
         console.log("fbResponse fbResponse", fbResponseService);
         if (fbResponseService && fbResponseService === 200) {
             setShowExibeModalErro(false)
-            //window.location.assign('/')
-            navigate("/")
+            window.location.assign('/')
+            //navigate("/")
         } else {
             setShowExibeModalErro(true)
         }

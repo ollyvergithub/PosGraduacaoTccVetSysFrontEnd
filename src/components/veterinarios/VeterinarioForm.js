@@ -8,13 +8,9 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {ModalSucesso} from "../modalBootstrap/ModalSucesso";
 import {PaginasContainer} from "../paginasContainer";
 import moment from "moment";
-import {
-    gerarRelatorioPdf,
-    patchFuncionario,
-    postFuncionario, retrieveFuncionario
-} from "../../services/funcionarios/Funcionarios.service";
+import {patchVeterinario, postVeterinario, retrieveVeterinario, gerarRelatorioPdf} from "../../services/veterinarios/Veterinarios.service";
 
-export const FuncionarioForm = () => {
+export const VeterinarioForm = () => {
 
     let {uuid} = useParams();
     const navigate = useNavigate();
@@ -22,7 +18,7 @@ export const FuncionarioForm = () => {
     const initial = {
         nome: '',
         cpf: '',
-        rg: '',
+        crmv: '',
         sexo: '',
         tipo_logradouro: '',
         logradouro: '',
@@ -41,16 +37,16 @@ export const FuncionarioForm = () => {
     const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
     const [loading, setLoading] = useState(false);
 
-    const carregaFuncionario = useCallback(async () => {
+    const carregaVeterinario = useCallback(async () => {
         if (uuid) {
-            let funcionario = await retrieveFuncionario(uuid)
-            setInitalState(funcionario)
+            let veterinario = await retrieveVeterinario(uuid)
+            setInitalState(veterinario)
         }
     }, [uuid])
 
     useEffect(() => {
-        carregaFuncionario()
-    }, [carregaFuncionario])
+        carregaVeterinario()
+    }, [carregaVeterinario])
 
     const handleSubmit = async (values) => {
         try {
@@ -66,28 +62,28 @@ export const FuncionarioForm = () => {
 
             setShowExibeModalSucesso(true)
             if (uuid) {
-                await patchFuncionario(uuid, payload)
+                await patchVeterinario(uuid, payload)
                 setBloqueiaBtnSalvar(true)
             } else {
-                await postFuncionario(payload)
+                await postVeterinario(payload)
                 setBloqueiaBtnSalvar(true)
             }
 
         } catch (e) {
             setBloqueiaBtnSalvar(false)
-            console.log("Erro ao cadastrar funcionário ", e)
+            console.log("Erro ao cadastrar veterinário ", e)
         }
     }
 
     const getPath = () => {
-        navigate("/funcionarios")
+        navigate("/veterinarios")
     }
 
     const relatorioPdf = async () => {
         try {
             setLoading(true)
             await gerarRelatorioPdf({
-                "uuids_administrativos": [uuid],
+                "uuids_veterinarios": [uuid],
             });
             setLoading(false)
         } catch (e) {
@@ -108,7 +104,7 @@ export const FuncionarioForm = () => {
                 ) :
 
                 <div className='container mb-3'>
-                    <h5 className='mb-0'>Cadastro de Clientes</h5>
+                    <h5 className='mb-0'>Cadastro de Veterinários</h5>
                     <Formik
                         initialValues={initalState}
                         onSubmit={handleSubmit}
@@ -158,13 +154,13 @@ export const FuncionarioForm = () => {
                                         }
                                     </div>
                                     <div className='col-md-4 mt-3'>
-                                        <label htmlFor="rg" className="form-label">RG</label>
+                                        <label htmlFor="crmv" className="form-label">CRMV</label>
                                         <input
                                             type="text"
-                                            name="rg"
-                                            id="rg"
+                                            name="crmv"
+                                            id="crmv"
                                             onChange={handleChange}
-                                            value={values.rg}
+                                            value={values.crmv}
                                             className="form-control"
                                         />
                                         {errors.nome && touched.nome && errors.nome &&
@@ -379,8 +375,8 @@ export const FuncionarioForm = () => {
                                     <ModalSucesso
                                         show={showExibeModalSucesso}
                                         handleClose={() => getPath()}
-                                        titulo={uuid ? "Funcionário editado com sucesso" : "Funcionário criado com sucesso"}
-                                        texto={uuid ? "O Funcionário foi editado com sucesso." : "O Funcionário foi criado com sucesso."}
+                                        titulo={uuid ? "Veterinário editado com sucesso" : "Veterinário criado com sucesso"}
+                                        texto={uuid ? "O Veterinário foi editado com sucesso." : "O Veterinário foi criado com sucesso."}
                                         primeiroBotaoTexto="Fechar"
                                         primeiroBotaoCss="success"
                                     />
