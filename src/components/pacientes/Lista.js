@@ -18,7 +18,7 @@ export const Lista = ({
                           setShowExibeModalExcluir
                       }) => {
 
-    const rowsPerPage = 2;
+    const rowsPerPage = 10;
 
     const dataTemplate = (rowData) => {
         return dataFormatada(rowData.data_nasc)

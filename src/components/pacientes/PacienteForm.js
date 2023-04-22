@@ -222,8 +222,7 @@ export const PacienteForm = () => {
                                         >
                                             <option value=''>Selecione um porte</option>
                                             {portes && portes.length > 0 && portes.map(item => (
-                                                <option key={item.uuid}
-                                                        value={item.uuid}>{item.get_porte_display}</option>
+                                                <option key={item.uuid}  value={item.uuid}>{item.get_porte_display}</option>
                                             ))}
                                         </select>
                                     </div>

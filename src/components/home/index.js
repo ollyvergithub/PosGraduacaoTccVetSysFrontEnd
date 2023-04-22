@@ -15,7 +15,7 @@ export const Home = () => {
             </div>
             <div className='container my-3'>
                 <div className='row'>
-                    <div className='col-md-4'>
+                    <div className='col-md-4 mb-2'>
                         <img src={ImgHome} className="img-fluid" alt="imagem-apresentação VetSys"/>
                     </div>
                     <div className='col-md-8'>

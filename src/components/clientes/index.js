@@ -19,7 +19,6 @@ export const Clientes = () => {
 
     const buscaClientes = useCallback(async (nome = '', cpf = '', telefone = '', paciente_uuid = '') => {
         let clientes = await getClientes(nome ? nome : '', cpf, telefone, paciente_uuid)
-        console.log("CCCCCCC clientes ", clientes)
         setClientes(clientes)
     }, [])
 
@@ -35,7 +34,6 @@ export const Clientes = () => {
 
     const buscarPacientes = useCallback(async () => {
         const pacientes = await getPacientes()
-        console.log("CCCCCCC pacientes ", pacientes)
         setPacientes(pacientes)
     }, [])
 
