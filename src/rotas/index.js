@@ -12,6 +12,10 @@ import {EstatisticasPacientes} from "../components/estatisticas/pacientes";
 import {Clientes} from "../components/clientes";
 import {CadastroDeClientes} from "../components/clientes/Cadastro";
 import {EstatisticasClientes} from "../components/estatisticas/clientes";
+import {Funcionarios} from "../components/funcionarios";
+import {CadastroDeFuncionarios} from "../components/funcionarios/Cadastro";
+import {EdicaoDeFuncionarios} from "../components/funcionarios/Edicao";
+import {EdicaoDeClientes} from "../components/clientes/Edicao";
 
 
 export const Rotas = () => {
@@ -92,7 +96,7 @@ export const Rotas = () => {
                     path="/edicao-de-cliente/:uuid"
                     element={
                         <PrivateRoute permissao=''  redirectTo="/sem-permissao">
-                            <CadastroDeClientes />
+                            <EdicaoDeClientes />
                         </PrivateRoute>
                     }
                 />
@@ -101,6 +105,30 @@ export const Rotas = () => {
                     element={
                         <PrivateRoute permissao=''  redirectTo="/sem-permissao">
                             <EstatisticasClientes />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/funcionarios"
+                    element={
+                        <PrivateRoute permissao='acessar_funcionarios_administrativos'  redirectTo="/sem-permissao">
+                            <Funcionarios />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/cadastro-de-funcionario"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <CadastroDeFuncionarios />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/edicao-de-funcionario/:uuid"
+                    element={
+                        <PrivateRoute permissao=''  redirectTo="/sem-permissao">
+                            <EdicaoDeFuncionarios />
                         </PrivateRoute>
                     }
                 />
