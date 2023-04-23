@@ -8,12 +8,14 @@ import {Filtros} from "./Filtros";
 import {TopoComBotaoAdicionarRegistro} from "../TopoComBotaoAdicionarRegistro";
 import {Relatorio} from "./Relatorio";
 import Loading from "../loading";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const Clientes = () => {
 
     const [clientes, setClientes] = useState([])
     const [pacientes, setPacientes] = useState([])
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
     const [registroParaExcluir, setRegistroParaExcluir] = useState({})
 
@@ -53,7 +55,9 @@ export const Clientes = () => {
             toastCustom.ToastCustomSuccess('Exclusão de paciente com sucesso.', 'O Paciente foi excluído com sucesso.')
             await buscaClientes()
         } catch (e) {
-            console.log("Erro ao apagar paciente ", e)
+            setShowExibeModalExcluir(false)
+            setShowExibeModalErro(true)
+            console.log("Erro ao apagar cliente ", e)
         }
     }
 
@@ -101,6 +105,17 @@ export const Clientes = () => {
                         showExibeModalExcluir={showExibeModalExcluir}
                         setShowExibeModalExcluir={setShowExibeModalExcluir}
                     />
+
+                    <section>
+                        <ModalErro
+                            show={showExibeModalErro}
+                            handleClose={() => setShowExibeModalErro(false)}
+                            titulo={"Erro ao excluir o cliente"}
+                            texto={"<p>Não foi possível excluir o cliente, tente novamente</p>"}
+                            primeiroBotaoTexto="Fechar"
+                            primeiroBotaoCss="success"
+                        />
+                    </section>
 
                 </div>
             }

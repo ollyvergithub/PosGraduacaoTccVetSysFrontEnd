@@ -9,6 +9,7 @@ import {ModalSucesso} from "../modalBootstrap/ModalSucesso";
 import {PaginasContainer} from "../paginasContainer";
 import moment from "moment";
 import {patchVeterinario, postVeterinario, retrieveVeterinario, gerarRelatorioPdf} from "../../services/veterinarios/Veterinarios.service";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const VeterinarioForm = () => {
 
@@ -35,6 +36,7 @@ export const VeterinarioForm = () => {
     const [initalState, setInitalState] = useState(initial)
     const [bloqueiaBtnSalvar, setBloqueiaBtnSalvar] = useState(false)
     const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const carregaVeterinario = useCallback(async () => {
@@ -60,7 +62,6 @@ export const VeterinarioForm = () => {
                 ...values
             }
 
-            setShowExibeModalSucesso(true)
             if (uuid) {
                 await patchVeterinario(uuid, payload)
                 setBloqueiaBtnSalvar(true)
@@ -68,10 +69,12 @@ export const VeterinarioForm = () => {
                 await postVeterinario(payload)
                 setBloqueiaBtnSalvar(true)
             }
+            setShowExibeModalSucesso(true)
 
         } catch (e) {
             setBloqueiaBtnSalvar(false)
             console.log("Erro ao cadastrar veterinário ", e)
+            setShowExibeModalErro(true)
         }
     }
 
@@ -341,7 +344,7 @@ export const VeterinarioForm = () => {
                                 </div>
                                 <div className='row'>
                                     <div className='d-flex justify-content-end pb-3 mt-3'>
-                                        <Link to="/funcionarios" state={{origem: 'edicao'}}>
+                                        <Link to="/veterinarios" state={{origem: 'edicao'}}>
                                             <button
                                                 type="button"
                                                 disabled={isSubmitting || bloqueiaBtnSalvar}
@@ -377,6 +380,16 @@ export const VeterinarioForm = () => {
                                         handleClose={() => getPath()}
                                         titulo={uuid ? "Veterinário editado com sucesso" : "Veterinário criado com sucesso"}
                                         texto={uuid ? "O Veterinário foi editado com sucesso." : "O Veterinário foi criado com sucesso."}
+                                        primeiroBotaoTexto="Fechar"
+                                        primeiroBotaoCss="success"
+                                    />
+                                </section>
+                                <section>
+                                    <ModalErro
+                                        show={showExibeModalErro}
+                                        handleClose={() => setShowExibeModalErro(false)}
+                                        titulo={uuid ? "Erro ao editar o veterinário" : "Erro ao cadastrar o veterinário"}
+                                        texto={"<p>Erro Veterinário com este cpf já existe.</p>"}
                                         primeiroBotaoTexto="Fechar"
                                         primeiroBotaoCss="success"
                                     />

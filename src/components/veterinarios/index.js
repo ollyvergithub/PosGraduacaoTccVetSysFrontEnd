@@ -7,11 +7,13 @@ import {TopoComBotaoAdicionarRegistro} from "../TopoComBotaoAdicionarRegistro";
 import {Filtros} from "./Filtros";
 import {Relatorio} from "./Relatorio";
 import {Lista} from "./Lista";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const Veterinarios = () => {
     const [veterinarios, setVeterinarios] = useState([])
     const [registroParaExcluir, setRegistroParaExcluir] = useState({})
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const buscaVeterinarios = useCallback(async (nome = '', cpf = '', crmv = '', telefone = '') => {
@@ -33,9 +35,11 @@ export const Veterinarios = () => {
         try {
             setShowExibeModalExcluir(false)
             await deleteVeterinario(registroParaExcluir.uuid)
-            toastCustom.ToastCustomSuccess('Exclusão de funcionário com sucesso.', 'O Funcionário foi excluído com sucesso.')
+            toastCustom.ToastCustomSuccess('Exclusão de veterinário com sucesso.', 'O Veterinário foi excluído com sucesso.')
             await buscaVeterinarios()
         } catch (e) {
+            setShowExibeModalExcluir(false)
+            setShowExibeModalErro(true)
             console.log("Erro ao apagar funcionário ", e)
         }
     }
@@ -84,6 +88,17 @@ export const Veterinarios = () => {
                         showExibeModalExcluir={showExibeModalExcluir}
                         setShowExibeModalExcluir={setShowExibeModalExcluir}
                     />
+
+                    <section>
+                        <ModalErro
+                            show={showExibeModalErro}
+                            handleClose={() => setShowExibeModalErro(false)}
+                            titulo={"Erro ao excluir o veterinário"}
+                            texto={"<p>Não foi possível excluir o veterinário, tente novamente</p>"}
+                            primeiroBotaoTexto="Fechar"
+                            primeiroBotaoCss="success"
+                        />
+                    </section>
                 </div>
             }
         </PaginasContainer>

@@ -18,6 +18,7 @@ import {
 import {trataNumericos} from "../../Utils";
 import {ModalSucesso} from "../modalBootstrap/ModalSucesso";
 import Loading from "../loading";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const PacienteForm = () => {
     let {uuid} = useParams();
@@ -40,6 +41,7 @@ export const PacienteForm = () => {
     const [initalState, setInitalState] = useState(inital)
     const [bloqueiaBtnSalvar, setBloqueiaBtnSalvar] = useState(false)
     const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const carregaPaciente = useCallback(async () => {
@@ -79,7 +81,6 @@ export const PacienteForm = () => {
             const payload = {
                 ...values
             }
-            setShowExibeModalSucesso(true)
             if (uuid) {
                 await patchPaciente(uuid, payload)
                 setBloqueiaBtnSalvar(true)
@@ -87,9 +88,11 @@ export const PacienteForm = () => {
                 await postPaciente(payload)
                 setBloqueiaBtnSalvar(true)
             }
+            setShowExibeModalSucesso(true)
         } catch (e) {
             setBloqueiaBtnSalvar(false)
             setShowExibeModalSucesso(false)
+            setShowExibeModalErro(true)
             console.log("Erro ao cadastrar paciente ", e)
         }
     }
@@ -341,6 +344,16 @@ export const PacienteForm = () => {
                                         handleClose={() => getPath()}
                                         titulo={uuid ? "Paciente editado com sucesso" : "Paciente criado com sucesso"}
                                         texto={uuid ? "O Paciente foi editado com sucesso." : "O Paciente foi criado com sucesso."}
+                                        primeiroBotaoTexto="Fechar"
+                                        primeiroBotaoCss="success"
+                                    />
+                                </section>
+                                <section>
+                                    <ModalErro
+                                        show={showExibeModalErro}
+                                        handleClose={() => setShowExibeModalErro(false)}
+                                        titulo={uuid ? "Erro ao editar o paciente" : "Erro ao cadastrar o paciente"}
+                                        texto={uuid ? "<p>Não foi possível editar o paciente, tente novamente</p>" : "<p>Não foi possível cadastrar o paciente, tente novamente</p>"}
                                         primeiroBotaoTexto="Fechar"
                                         primeiroBotaoCss="success"
                                     />

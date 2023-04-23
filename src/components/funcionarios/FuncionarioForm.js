@@ -13,6 +13,7 @@ import {
     patchFuncionario,
     postFuncionario, retrieveFuncionario
 } from "../../services/funcionarios/Funcionarios.service";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const FuncionarioForm = () => {
 
@@ -39,6 +40,7 @@ export const FuncionarioForm = () => {
     const [initalState, setInitalState] = useState(initial)
     const [bloqueiaBtnSalvar, setBloqueiaBtnSalvar] = useState(false)
     const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const carregaFuncionario = useCallback(async () => {
@@ -64,7 +66,6 @@ export const FuncionarioForm = () => {
                 ...values
             }
 
-            setShowExibeModalSucesso(true)
             if (uuid) {
                 await patchFuncionario(uuid, payload)
                 setBloqueiaBtnSalvar(true)
@@ -72,9 +73,11 @@ export const FuncionarioForm = () => {
                 await postFuncionario(payload)
                 setBloqueiaBtnSalvar(true)
             }
+            setShowExibeModalSucesso(true)
 
         } catch (e) {
             setBloqueiaBtnSalvar(false)
+            setShowExibeModalErro(true)
             console.log("Erro ao cadastrar funcionário ", e)
         }
     }
@@ -381,6 +384,16 @@ export const FuncionarioForm = () => {
                                         handleClose={() => getPath()}
                                         titulo={uuid ? "Funcionário editado com sucesso" : "Funcionário criado com sucesso"}
                                         texto={uuid ? "O Funcionário foi editado com sucesso." : "O Funcionário foi criado com sucesso."}
+                                        primeiroBotaoTexto="Fechar"
+                                        primeiroBotaoCss="success"
+                                    />
+                                </section>
+                                <section>
+                                    <ModalErro
+                                        show={showExibeModalErro}
+                                        handleClose={() => setShowExibeModalErro(false)}
+                                        titulo={uuid ? "Erro ao editar o funcionário" : "Erro ao cadastrar o funcionário"}
+                                        texto={"<p>Erro: Funcionário com este cpf já existe.</p>"}
                                         primeiroBotaoTexto="Fechar"
                                         primeiroBotaoCss="success"
                                     />

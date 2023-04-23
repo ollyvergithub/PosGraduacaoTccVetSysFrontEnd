@@ -13,6 +13,7 @@ import {patchCliente, postCliente, retrieveCliente} from "../../services/cliente
 import {gerarRelatorioPdf} from "../../services/clientes/Clientes.service";
 import Loading from "../loading";
 import MaskedInput from "react-text-mask";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const ClienteForm = () => {
     let {uuid} = useParams();
@@ -52,6 +53,7 @@ export const ClienteForm = () => {
     const [initalState, setInitalState] = useState(initial)
     const [bloqueiaBtnSalvar, setBloqueiaBtnSalvar] = useState(false)
     const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [selectedPacientes, setSelectedPacientes] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -88,8 +90,6 @@ export const ClienteForm = () => {
                 ...values
             }
 
-            setShowExibeModalSucesso(true)
-
             if (uuid) {
                 await patchCliente(uuid, payload)
                 setBloqueiaBtnSalvar(true)
@@ -98,9 +98,12 @@ export const ClienteForm = () => {
                 setBloqueiaBtnSalvar(true)
             }
 
+            setShowExibeModalSucesso(true)
+
         } catch (e) {
             setBloqueiaBtnSalvar(false)
             console.log("Erro ao cadastrar cliente ", e)
+            setShowExibeModalErro(true)
         }
     }
 
@@ -454,6 +457,16 @@ export const ClienteForm = () => {
                                         handleClose={() => getPath()}
                                         titulo={uuid ? "Cliente editado com sucesso" : "Cliente criado com sucesso"}
                                         texto={uuid ? "O Cliente foi editado com sucesso." : "O Cliente foi criado com sucesso."}
+                                        primeiroBotaoTexto="Fechar"
+                                        primeiroBotaoCss="success"
+                                    />
+                                </section>
+                                <section>
+                                    <ModalErro
+                                        show={showExibeModalErro}
+                                        handleClose={() => setShowExibeModalErro(false)}
+                                        titulo={uuid ? "Erro ao editar o cliente" : "Erro ao cadastrar o cliente"}
+                                        texto={"<p>Erro Cliente com este cpf já existe.</p>"}
                                         primeiroBotaoTexto="Fechar"
                                         primeiroBotaoCss="success"
                                     />

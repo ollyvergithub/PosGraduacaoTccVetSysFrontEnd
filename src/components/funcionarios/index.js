@@ -10,11 +10,13 @@ import {TopoComBotaoAdicionarRegistro} from "../TopoComBotaoAdicionarRegistro";
 import {Filtros} from "./Filtros";
 import {Relatorio} from "./Relatorio";
 import Loading from "../loading";
+import {ModalErro} from "../modalBootstrap/ModalErro";
 
 export const Funcionarios = () => {
     const [funcionarios, setFuncionarios] = useState([])
     const [registroParaExcluir, setRegistroParaExcluir] = useState({})
     const [showExibeModalExcluir, setShowExibeModalExcluir] = useState(false);
+    const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const buscaFuncionarios = useCallback(async (nome = '', cpf = '', rg = '', telefone = '') => {
@@ -38,6 +40,8 @@ export const Funcionarios = () => {
             toastCustom.ToastCustomSuccess('Exclusão de funcionário com sucesso.', 'O Funcionário foi excluído com sucesso.')
             await buscaFuncionarios()
         } catch (e) {
+            setShowExibeModalExcluir(false)
+            setShowExibeModalErro(true)
             console.log("Erro ao apagar funcionário ", e)
         }
     }
@@ -85,6 +89,17 @@ export const Funcionarios = () => {
                         showExibeModalExcluir={showExibeModalExcluir}
                         setShowExibeModalExcluir={setShowExibeModalExcluir}
                     />
+
+                    <section>
+                        <ModalErro
+                            show={showExibeModalErro}
+                            handleClose={() => setShowExibeModalErro(false)}
+                            titulo={"Erro ao excluir o cliente"}
+                            texto={"<p>Não foi possível excluir o funcionário, tente novamente</p>"}
+                            primeiroBotaoTexto="Fechar"
+                            primeiroBotaoCss="success"
+                        />
+                    </section>
                 </div>
             }
         </PaginasContainer>
