@@ -18,7 +18,6 @@ export const Veterinarios = () => {
 
     const buscaVeterinarios = useCallback(async (nome = '', cpf = '', crmv = '', telefone = '') => {
         let veterinarios = await getVeterinarios(nome ? nome : '', cpf, crmv, telefone)
-        console.log("CCCCCCCC veterinarios ", veterinarios)
         setVeterinarios(veterinarios)
     }, [])
 

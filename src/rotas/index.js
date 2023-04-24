@@ -18,6 +18,9 @@ import {EdicaoDeFuncionarios} from "../components/funcionarios/Edicao";
 import {EdicaoDeClientes} from "../components/clientes/Edicao";
 import {Veterinarios} from "../components/veterinarios";
 import {CadastroDeVeterinarios} from "../components/veterinarios/Cadastro";
+import {Consultas} from "../components/consultas";
+import {CadastroDeConsultas} from "../components/consultas/Cadastro";
+import {EdicaoDeConsultas} from "../components/consultas/Edicao";
 
 
 export const Rotas = () => {
@@ -155,6 +158,30 @@ export const Rotas = () => {
                     element={
                         <PrivateRoute permissao='acessar_veterinarios'  redirectTo="/sem-permissao">
                             <CadastroDeVeterinarios />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/consultas"
+                    element={
+                        <PrivateRoute permissao='acessar_consultas'  redirectTo="/sem-permissao">
+                            <Consultas />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/cadastro-de-consulta"
+                    element={
+                        <PrivateRoute permissao='acessar_consultas'  redirectTo="/sem-permissao">
+                            <CadastroDeConsultas />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/edicao-de-consulta/:uuid"
+                    element={
+                        <PrivateRoute permissao='acessar_consultas'  redirectTo="/sem-permissao">
+                            <EdicaoDeConsultas />
                         </PrivateRoute>
                     }
                 />

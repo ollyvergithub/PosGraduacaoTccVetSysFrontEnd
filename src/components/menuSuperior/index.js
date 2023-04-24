@@ -31,6 +31,9 @@ export const MenuSuperior = () => {
                             <li className="nav-item">
                                 <NavLink className='nav-link cor-itens-menu py-3' to='/veterinarios'>Veterinários</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className='nav-link cor-itens-menu py-3' to='/consultas'>Consultas</NavLink>
+                            </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle cor-itens-menu py-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Estatísticas
