@@ -24,17 +24,27 @@ export const HistoricoDeConsultas = ({pacienteUuid, consultaUuid}) => {
                     <p>Selecione um paciente para exibir o histórico</p>
                 ) :
                 <>
+                    {historicoDeConsultas && historicoDeConsultas.length > 0 ?
 
-                    {historicoDeConsultas && historicoDeConsultas.length > 0 ? historicoDeConsultas.map(item =>
-
-                        <div key={item.uuid} className='border-bottom mb-3 pb-2'>
-                            <p className='mb-0 fonte-14'><i><strong>Data:</strong> {item.data_da_consulta} | <strong>Veterinário:</strong> {item.veterinario.nome} | <strong>CRMV: </strong>{item.veterinario.crmv}</i></p>
-                            <p className='mb-0'>{item.ficha_clinica}</p>
+                        <div className="accordion" id="accordionPanelsStayOpenExample">
+                            {historicoDeConsultas.map(item =>
+                                <div className="accordion-item">
+                                    <h2 className="accordion-header">
+                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#panelsStayOpen-${item.uuid}`} aria-expanded="true" aria-controls={`panelsStayOpen-${item.uuid}`}>
+                                            <i><strong>Data:</strong> {item.data_da_consulta} | <strong>Veterinário:</strong> {item.veterinario.nome} | <strong>CRMV: </strong>{item.veterinario.crmv}</i>
+                                        </button>
+                                    </h2>
+                                    <div id={`panelsStayOpen-${item.uuid}`} className="accordion-collapse collapse">
+                                        <div className="accordion-body">
+                                            <p className='mb-0'>{item.ficha_clinica}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
-                        ) :
-
-                        <p>Não existe histórico de consultas para esse paciente</p>
+                        :
+                            <p>Não existe histórico de consultas para esse paciente</p>
                     }
                 </>
             }
