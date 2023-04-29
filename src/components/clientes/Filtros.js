@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export const Filtros = ({buscarClientes, pacientes, }) => {
+export const Filtros = ({buscarClientes, pacientes,}) => {
 
     const initialState = {
         filtrar_por_nome: "",
@@ -29,80 +29,93 @@ export const Filtros = ({buscarClientes, pacientes, }) => {
     }
 
     return (
-
-        <form onSubmit={handleSubmitFiltros}>
-            <div className='row mb-4'>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_nome">Filtrar por nome</label>
-                    <input
-                        value={stateFiltros.filtrar_por_nome}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_nome"
-                        id="filtrar_por_nome"
-                        type="text"
-                        className="form-control"
-                        placeholder="Filtrar por nome de cliente"
-                    />
-                </div>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_cpf">Filtrar por cpf</label>
-                    <input
-                        value={stateFiltros.filtrar_por_cpf}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_cpf"
-                        id="filtrar_por_cpf"
-                        type="text"
-                        className="form-control"
-                        placeholder="Filtrar por cpf de cliente"
-                    />
-                </div>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_telefone">Filtrar por telefone</label>
-                    <input
-                        value={stateFiltros.filtrar_por_telefone}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_telefone"
-                        id="filtrar_por_telefone"
-                        type="text"
-                        className="form-control"
-                        placeholder="Filtrar por telefone de cliente"
-                    />
-                </div>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_paciente">Filtrar por paciente</label>
-                    <select
-                        value={stateFiltros.filtrar_por_paciente}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_paciente"
-                        id="filtrar_por_paciente"
-                        className="form-select"
-                    >
-                        <option value=''>Selecione um paciente</option>
-                        {pacientes && pacientes.length > 0 && pacientes.map(item => (
-                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="d-flex justify-content-end pb-3 mt-3">
-
-                    <button
-                        onClick={() => limparFiltros()}
-                        type="button"
-                        className="btn btn-outline-success mt-2 me-2"
-                    >
-                        Limpar
+        <div className="accordion mb-5" id="accordionExample">
+            <div className="accordion-item">
+                <h2 className="accordion-header">
+                    <button className="accordion-button collapsed fonte-16" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Filtros
                     </button>
+                </h2>
+                <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div className="accordion-body">
+                        <form onSubmit={handleSubmitFiltros}>
+                            <div className='row mb-4'>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_nome">Filtrar por nome</label>
+                                    <input
+                                        value={stateFiltros.filtrar_por_nome}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_nome"
+                                        id="filtrar_por_nome"
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Filtrar por nome de cliente"
+                                    />
+                                </div>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_cpf">Filtrar por cpf</label>
+                                    <input
+                                        value={stateFiltros.filtrar_por_cpf}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_cpf"
+                                        id="filtrar_por_cpf"
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Filtrar por cpf de cliente"
+                                    />
+                                </div>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_telefone">Filtrar por
+                                        telefone</label>
+                                    <input
+                                        value={stateFiltros.filtrar_por_telefone}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_telefone"
+                                        id="filtrar_por_telefone"
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Filtrar por telefone de cliente"
+                                    />
+                                </div>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_paciente">Filtrar por
+                                        paciente</label>
+                                    <select
+                                        value={stateFiltros.filtrar_por_paciente}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_paciente"
+                                        id="filtrar_por_paciente"
+                                        className="form-select"
+                                    >
+                                        <option value=''>Selecione um paciente</option>
+                                        {pacientes && pacientes.length > 0 && pacientes.map(item => (
+                                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
+                                        ))}
+                                    </select>
+                                </div>
 
-                    <button
-                        type="submit"
-                        className="btn btn-success mt-2"
-                    >
-                        Filtrar
-                    </button>
+                                <div className="d-flex justify-content-end mt-3">
+
+                                    <button
+                                        onClick={() => limparFiltros()}
+                                        type="button"
+                                        className="btn btn-outline-success mt-2 me-2"
+                                    >
+                                        Limpar
+                                    </button>
+
+                                    <button
+                                        type="submit"
+                                        className="btn btn-success mt-2"
+                                    >
+                                        Filtrar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     )
-
 }

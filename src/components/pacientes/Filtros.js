@@ -30,84 +30,98 @@ export const Filtros = ({clientes, especies, racas, buscarPacientes}) => {
 
     return (
 
-        <form onSubmit={handleSubmitFiltros}>
-            <div className='row mb-4'>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_nome">Filtrar nome</label>
-                    <input
-                        value={stateFiltros.filtrar_por_nome}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_nome"
-                        id="filtrar_por_nome"
-                        type="text"
-                        className="form-control"
-                        placeholder="Filtrar por nome de paciente"
-                    />
-                </div>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_cliente">Filtrar por cliente</label>
-                    <select
-                        value={stateFiltros.filtrar_por_cliente}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_cliente"
-                        id="filtrar_por_cliente"
-                        className="form-select"
-                    >
-                        <option value=''>Selecione um cliente</option>
-                        {clientes && clientes.length > 0 && clientes.map(item => (
-                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_especie">Filtrar por espécie</label>
-                    <select
-                        value={stateFiltros.filtrar_por_especie}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_especie"
-                        id="filtrar_por_especie"
-                        className="form-select"
-                    >
-                        <option value=''>Selecione uma espécie</option>
-                        {especies && especies.length > 0 && especies.map(item => (
-                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="col-md-3">
-                    <label className="form-label" htmlFor="filtrar_por_raca">Filtrar por raça</label>
-                    <select
-                        value={stateFiltros.filtrar_por_raca}
-                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
-                        name="filtrar_por_raca"
-                        id="filtrar_por_raca"
-                        className="form-select"
-                    >
-                        <option value=''>Selecione uma raça</option>
-                        {racas && racas.length > 0 && racas.map(item => (
-                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="d-flex justify-content-end pb-3 mt-3">
-
-                    <button
-                        onClick={() => limparFiltros()}
-                        type="button"
-                        className="btn btn-outline-success mt-2 me-2"
-                    >
-                        Limpar
+        <div className="accordion mb-5" id="accordionExample">
+            <div className="accordion-item">
+                <h2 className="accordion-header">
+                    <button className="accordion-button collapsed fonte-16" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Filtros
                     </button>
+                </h2>
+                <div id="flush-collapseOne" className="accordion-collapse collapse"
+                     data-bs-parent="#accordionFlushExample">
+                    <div className="accordion-body">
+                        <form onSubmit={handleSubmitFiltros}>
+                            <div className='row mb-4'>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_nome">Filtrar nome</label>
+                                    <input
+                                        value={stateFiltros.filtrar_por_nome}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_nome"
+                                        id="filtrar_por_nome"
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Filtrar por nome de paciente"
+                                    />
+                                </div>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_cliente">Filtrar por cliente</label>
+                                    <select
+                                        value={stateFiltros.filtrar_por_cliente}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_cliente"
+                                        id="filtrar_por_cliente"
+                                        className="form-select"
+                                    >
+                                        <option value=''>Selecione um cliente</option>
+                                        {clientes && clientes.length > 0 && clientes.map(item => (
+                                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_especie">Filtrar por espécie</label>
+                                    <select
+                                        value={stateFiltros.filtrar_por_especie}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_especie"
+                                        id="filtrar_por_especie"
+                                        className="form-select"
+                                    >
+                                        <option value=''>Selecione uma espécie</option>
+                                        {especies && especies.length > 0 && especies.map(item => (
+                                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="col-md-3">
+                                    <label className="form-label" htmlFor="filtrar_por_raca">Filtrar por raça</label>
+                                    <select
+                                        value={stateFiltros.filtrar_por_raca}
+                                        onChange={(e) => handleChangeFiltros(e.target.name, e.target.value)}
+                                        name="filtrar_por_raca"
+                                        id="filtrar_por_raca"
+                                        className="form-select"
+                                    >
+                                        <option value=''>Selecione uma raça</option>
+                                        {racas && racas.length > 0 && racas.map(item => (
+                                            <option key={item.uuid} value={item.uuid}>{item.nome}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="d-flex justify-content-end pb-0 mt-3">
 
-                    <button
-                        type="submit"
-                        className="btn btn-success mt-2"
-                    >
-                        Filtrar
-                    </button>
+                                    <button
+                                        onClick={() => limparFiltros()}
+                                        type="button"
+                                        className="btn btn-outline-success mt-2 me-2"
+                                    >
+                                        Limpar
+                                    </button>
+
+                                    <button
+                                        type="submit"
+                                        className="btn btn-success mt-2"
+                                    >
+                                        Filtrar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     )
 
 }
