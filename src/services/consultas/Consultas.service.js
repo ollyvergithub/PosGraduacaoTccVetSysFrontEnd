@@ -50,3 +50,7 @@ export const gerarRelatorioPdf = async (payload) => {
             return error.response;
         })
 };
+
+export const getHistoricoDeConsultas = async (paciente_uuid, consulta_uuid="") => {
+    return (await api.get(`/api/consultas/historico-de-consultas-por-paciente/?paciente=${paciente_uuid}${consulta_uuid ? '&consulta=' + consulta_uuid : ''}`, authHeader)).data
+};

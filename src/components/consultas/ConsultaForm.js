@@ -17,6 +17,7 @@ import {UseRetornaVeterinarios} from "../../hooks/UseRetornaVeterinarios";
 import {ModalSucesso} from "../modalBootstrap/ModalSucesso";
 import {ModalErro} from "../modalBootstrap/ModalErro";
 import Loading from "../loading";
+import {HistoricoDeConsultas} from "./HistoricoDeConsultas";
 
 export const ConsultaForm = () => {
     let {uuid} = useParams();
@@ -39,11 +40,13 @@ export const ConsultaForm = () => {
     const [showExibeModalSucesso, setShowExibeModalSucesso] = useState(false)
     const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [pacienteUuid,setPacienteUuid] = useState('');
 
     const carregaConsulta = useCallback(async () => {
         if (uuid) {
             let consulta = await retrieveConsulta(uuid)
             setInitalState(consulta)
+            setPacienteUuid(consulta.paciente)
         }
     }, [uuid])
 
@@ -128,8 +131,7 @@ export const ConsultaForm = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className='row'>
                                     <div className='col-md-4 mt-3'>
-                                        <label htmlFor="data_da_consulta" className="form-label">Data da
-                                            consulta</label>
+                                        <label htmlFor="data_da_consulta" className="form-label">Data da consulta</label>
                                         <DatePickerField
                                             name="data_da_consulta"
                                             id="data_da_consulta"
@@ -138,15 +140,17 @@ export const ConsultaForm = () => {
                                             maxDate={new Date()}
                                         />
                                         {errors.data_da_consulta && touched.data_da_consulta && errors.data_da_consulta &&
-                                            <span
-                                                className="span_erro text-danger mt-1"> {errors.data_da_consulta} </span>
+                                            <span className="span_erro text-danger mt-1"> {errors.data_da_consulta} </span>
                                         }
                                     </div>
                                     <div className='col-md-4 mt-3'>
                                         <label htmlFor="paciente" className="form-label">Paciente</label>
                                         <select
                                             value={values.paciente}
-                                            onChange={handleChange}
+                                            onChange={(e)=> {
+                                                handleChange(e)
+                                                setPacienteUuid(e.target.value)
+                                            }}
                                             name="paciente"
                                             id="paciente"
                                             className="form-select"
@@ -214,8 +218,7 @@ export const ConsultaForm = () => {
                                             <option value='RETORNO'>Retorno</option>
                                         </select>
                                         {errors.tipo_de_consulta && touched.tipo_de_consulta && errors.tipo_de_consulta &&
-                                            <span
-                                                className="span_erro text-danger mt-1"> {errors.tipo_de_consulta} </span>
+                                            <span className="span_erro text-danger mt-1"> {errors.tipo_de_consulta} </span>
                                         }
                                     </div>
 
@@ -294,10 +297,13 @@ export const ConsultaForm = () => {
                                         primeiroBotaoCss="success"
                                     />
                                 </section>
-
                             </form>
                         )}
                     </Formik>
+                    <HistoricoDeConsultas
+                        pacienteUuid={pacienteUuid}
+                        consultaUuid={uuid}
+                    />
                 </div>
             }
         </PaginasContainer>
