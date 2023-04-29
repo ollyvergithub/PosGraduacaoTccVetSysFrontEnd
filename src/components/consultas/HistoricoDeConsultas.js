@@ -1,9 +1,11 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {getHistoricoDeConsultas} from "../../services/consultas/Consultas.service";
+import {retrievePaciente} from "../../services/pacientes/Pacientes.service";
 
 export const HistoricoDeConsultas = ({pacienteUuid, consultaUuid}) => {
 
     const [historicoDeConsultas, setHistoricoDeConsultas] = useState([])
+    const [paciente,setPaciente] = useState('')
 
     const carregaHistoricoDeConsultas = useCallback(async () => {
         if (pacienteUuid) {
@@ -17,9 +19,26 @@ export const HistoricoDeConsultas = ({pacienteUuid, consultaUuid}) => {
             .catch(console.error);
     }, [carregaHistoricoDeConsultas])
 
+    const carregaPaciente = useCallback(async ()=>{
+        if (pacienteUuid){
+            let paciente = await retrievePaciente(pacienteUuid)
+            setPaciente(paciente)
+        }else {
+            setPaciente('')
+        }
+
+
+    }, [pacienteUuid])
+
+    useEffect(()=>{
+        carregaPaciente()
+            .catch("Erro ao buscar paciente")
+    }, [carregaPaciente])
+
     return (
         <>
-            <h5><strong>Histórico de consultas</strong></h5>
+            {/*<h5><strong>Histórico de consultas {pacienteRef && pacienteRef.current && pacienteRef.current}</strong></h5>*/}
+            <h5><strong>Histórico de consultas {paciente && paciente.nome && paciente.nome}</strong></h5>
             {!pacienteUuid ? (
                     <p>Selecione um paciente para exibir o histórico</p>
                 ) :

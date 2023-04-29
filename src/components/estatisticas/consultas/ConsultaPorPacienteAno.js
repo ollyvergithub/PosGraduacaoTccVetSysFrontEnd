@@ -25,7 +25,7 @@ export const ConsultaPorPacienteAno = ({mesAno, setMesAno, pacientes, paciente, 
                                     ))}
                                 </select>
                             </div>
-                            <div className='col-md-4'>
+                            <div className='col-md-4 pe-0 pe-md-2 mt-1 mt-md-0'>
                                 <DatePicker
                                     selected={mesAno}
                                     onChange={(date) => setMesAno(date)}
