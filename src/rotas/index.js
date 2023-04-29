@@ -21,6 +21,7 @@ import {CadastroDeVeterinarios} from "../components/veterinarios/Cadastro";
 import {Consultas} from "../components/consultas";
 import {CadastroDeConsultas} from "../components/consultas/Cadastro";
 import {EdicaoDeConsultas} from "../components/consultas/Edicao";
+import {EstatisticasConsultas} from "../components/estatisticas/consultas";
 
 
 export const Rotas = () => {
@@ -182,6 +183,14 @@ export const Rotas = () => {
                     element={
                         <PrivateRoute permissao='acessar_consultas'  redirectTo="/sem-permissao">
                             <EdicaoDeConsultas />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/estatisticas-consultas"
+                    element={
+                        <PrivateRoute permissao='acessar_consultas'  redirectTo="/sem-permissao">
+                            <EstatisticasConsultas />
                         </PrivateRoute>
                     }
                 />

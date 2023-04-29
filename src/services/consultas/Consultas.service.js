@@ -54,3 +54,66 @@ export const gerarRelatorioPdf = async (payload) => {
 export const getHistoricoDeConsultas = async (paciente_uuid, consulta_uuid="") => {
     return (await api.get(`/api/consultas/historico-de-consultas-por-paciente/?paciente=${paciente_uuid}${consulta_uuid ? '&consulta=' + consulta_uuid : ''}`, authHeader)).data
 };
+
+export const getGerarEstatisticasPorMesAno = async (mes, ano) => {
+    return api
+        .get(`/api/consultas/gerar-estatisticas-por-mes-e-ano?mes=${mes}&ano=${ano}`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            //Create a Blob from the arquivo Stream
+            const file = new Blob([response.data], {type: response.data.type});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+            return fileURL
+        }).catch(error => {
+            return error.response;
+        })
+};
+
+export const getGerarEstatisticasPorAno = async (ano) => {
+    return api
+        .get(`/api/consultas/gerar-estatisticas-por-ano?ano=${ano}`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            //Create a Blob from the arquivo Stream
+            const file = new Blob([response.data], {type: response.data.type});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+            return fileURL
+        }).catch(error => {
+            return error.response;
+        })
+};
+
+export const getGerarEstatisticasPorPacienteAno = async (paciente, ano) => {
+    return api
+        .get(`/api/consultas/gerar-estatisticas-por-paciente-ano?paciente=${paciente}&ano=${ano}`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            //Create a Blob from the arquivo Stream
+            const file = new Blob([response.data], {type: response.data.type});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+            return fileURL
+        }).catch(error => {
+            return error.response;
+        })
+};

@@ -54,6 +54,7 @@ export const MenuSuperior = () => {
                                         >
                                             Clientes
                                         </NavLink>
+                                        <Link className='cor-itens-menu dropdown-item' to='/estatisticas-consultas'>Consultas</Link>
                                     </li>
                                     <li><Link className="dropdown-item" href="#">Another action</Link></li>
                                     <li>

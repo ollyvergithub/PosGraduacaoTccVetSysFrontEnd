@@ -28,7 +28,7 @@ export const HistoricoDeConsultas = ({pacienteUuid, consultaUuid}) => {
 
                         <div className="accordion" id="accordionPanelsStayOpenExample">
                             {historicoDeConsultas.map(item =>
-                                <div className="accordion-item">
+                                <div key={item.uuid} className="accordion-item">
                                     <h2 className="accordion-header">
                                         <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#panelsStayOpen-${item.uuid}`} aria-expanded="true" aria-controls={`panelsStayOpen-${item.uuid}`}>
                                             <i><strong>Data:</strong> {item.data_da_consulta} | <strong>Veterinário:</strong> {item.veterinario.nome} | <strong>CRMV: </strong>{item.veterinario.crmv}</i>
