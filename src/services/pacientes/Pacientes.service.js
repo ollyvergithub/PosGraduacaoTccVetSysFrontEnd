@@ -39,6 +39,48 @@ export const getPortes = async () => {
     return (await api.get(`/api/portes/`, authHeader)).data
 };
 
+export const getGerarEstatisticasPorAno = async (ano) => {
+    return api
+        .get(`/api/pacientes/gerar-estatisticas-por-ano?ano=${ano}`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            //Create a Blob from the arquivo Stream
+            const file = new Blob([response.data], {type: response.data.type});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+            return fileURL
+        }).catch(error => {
+            return error.response;
+        })
+};
+
+export const getGerarEstatisticasPorMesAno = async (mes, ano) => {
+    return api
+        .get(`/api/pacientes/gerar-estatisticas-por-mes-e-ano?mes=${mes}&ano=${ano}`, {
+            responseType: 'blob',
+            timeout: 30000,
+            headers: {
+                'Authorization': `Token ${localStorage.getItem(TOKEN_ALIAS)}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            //Create a Blob from the arquivo Stream
+            const file = new Blob([response.data], {type: response.data.type});
+            //Build a URL from the file
+            const fileURL = URL.createObjectURL(file);
+            return fileURL
+        }).catch(error => {
+            return error.response;
+        })
+};
+
 export const gerarRelatorioPdf = async (payload) => {
     return api
         .post(`/api/pacientes/gerar-relatorio-pdf/`, payload, {

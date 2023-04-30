@@ -2,10 +2,9 @@ import {useState} from "react";
 import formLogin from "../../services/login/formLogin";
 import {ModalErro} from "../modalBootstrap/ModalErro";
 import Loading from "../loading";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const LoginForm = () => {
-    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +19,6 @@ export const LoginForm = () => {
         if (data && data.status === 200) {
             setShowExibeModalErro(false)
             window.location.assign('/')
-            //navigate("/")
         } else {
             setShowExibeModalErro(true)
         }

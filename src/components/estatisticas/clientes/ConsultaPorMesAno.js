@@ -5,7 +5,7 @@ export const ConsultaPorMesAno = ({mesAno, setMesAno, gerarEstatitisticasPorMesA
     return(
         <div className="col">
             <div className="card text-bg-light">
-                <div className="card-header">Consultas por mês e ano</div>
+                <div className="card-header">Clientes por mês e ano</div>
                 <div className="card-body">
                     <div className="card-text">
                         <div>

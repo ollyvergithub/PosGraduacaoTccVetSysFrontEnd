@@ -75,7 +75,7 @@ export const Rotas = () => {
                     }
                 />
                 <Route
-                    path="/gerar-estatisticas-pacientes"
+                    path="/estatisticas-pacientes"
                     element={
                         <PrivateRoute permissao=''  redirectTo="/sem-permissao">
                             <EstatisticasPacientes />
@@ -107,7 +107,7 @@ export const Rotas = () => {
                     }
                 />
                 <Route
-                    path="/gerar-estatisticas-clientes"
+                    path="/estatisticas-clientes"
                     element={
                         <PrivateRoute permissao=''  redirectTo="/sem-permissao">
                             <EstatisticasClientes />

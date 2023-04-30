@@ -3,10 +3,8 @@ import fbLogin from "../../services/login/fbLogin";
 import {useState} from "react";
 import {ModalErro} from "../modalBootstrap/ModalErro";
 import Loading from "../loading";
-import {useNavigate} from "react-router-dom";
 
 export const LoginFacebook = () => {
-    const navigate = useNavigate();
 
     const [showExibeModalErro, setShowExibeModalErro] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -19,7 +17,6 @@ export const LoginFacebook = () => {
         if (fbResponseService && fbResponseService === 200) {
             setShowExibeModalErro(false)
             window.location.assign('/')
-            //navigate("/")
         } else {
             setShowExibeModalErro(true)
         }

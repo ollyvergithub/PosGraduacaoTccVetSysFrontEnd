@@ -1,28 +1,28 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 
-export const ConsultaPorMesAno = ({mesAno, setMesAno, gerarEstatitisticasPorMesAno}) => {
+export const ConsultaPorAno = ({mesAno, setMesAno, gerarEstatitisticasPorAno}) => {
     return(
         <div className="col">
             <div className="card text-bg-light">
-                <div className="card-header">Consultas por mês e ano</div>
+                <div className="card-header">Clientes por ano</div>
                 <div className="card-body">
                     <div className="card-text">
                         <div>
                             <DatePicker
                                 selected={mesAno}
                                 onChange={(date) => setMesAno(date)}
-                                dateFormat="MM/yyyy"
-                                showMonthYearPicker
-                                showFullMonthYearPicker
                                 locale="pt"
                                 className='form-control'
                                 maxDate={new Date()}
+                                showYearPicker
+                                dateFormat="yyyy"
+                                yearItemNumber={9}
                             />
                         </div>
                         <div className='text-end mt-2'>
                             <button
-                                onClick={gerarEstatitisticasPorMesAno}
+                                onClick={gerarEstatitisticasPorAno}
                                 type="button"
                                 className="btn btn-success"
                                 disabled={!mesAno}
