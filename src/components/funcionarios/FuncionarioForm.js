@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Loading from "../loading";
-import {Formik} from "formik";
+import {FieldArray, Formik} from "formik";
 import {YupValidation} from "./YupValidation";
 import MaskedInput from "react-text-mask";
 import {DatePickerField} from "../datePickerField";
@@ -14,6 +14,7 @@ import {
     postFuncionario, retrieveFuncionario
 } from "../../services/funcionarios/Funcionarios.service";
 import {ModalErro} from "../modalBootstrap/ModalErro";
+import {Dependentes} from "./Dependentes";
 
 export const FuncionarioForm = () => {
 
@@ -35,6 +36,7 @@ export const FuncionarioForm = () => {
         data_de_nascimento: "",
         email: "",
         descricao: "",
+        dependentes_do_funcionario: [],
     }
 
     const [initalState, setInitalState] = useState(initial)
@@ -62,10 +64,20 @@ export const FuncionarioForm = () => {
                 values.data_de_nascimento = undefined
             }
 
+            if (values.dependentes_do_funcionario && values.dependentes_do_funcionario.length > 0) {
+                values.dependentes_do_funcionario.map((item) => {
+                        if (item.data_de_nascimento) {
+                            item.data_de_nascimento = moment(item.data_de_nascimento).format("YYYY-MM-DD")
+                        } else {
+                            item.data_de_nascimento = undefined
+                        }
+                    }
+                )
+            }
+
             const payload = {
                 ...values
             }
-
             if (uuid) {
                 await patchFuncionario(uuid, payload)
                 setBloqueiaBtnSalvar(true)
@@ -98,7 +110,7 @@ export const FuncionarioForm = () => {
         }
     };
 
-    return(
+    return (
         <PaginasContainer>
             {loading ? (
                     <Loading
@@ -148,7 +160,7 @@ export const FuncionarioForm = () => {
                                         <label htmlFor="cpf" className="form-label">CPF</label>
 
                                         <MaskedInput
-                                            mask = {[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
+                                            mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
                                             type="text"
                                             value={values.cpf}
                                             name="cpf"
@@ -170,8 +182,8 @@ export const FuncionarioForm = () => {
                                             value={values.rg}
                                             className="form-control"
                                         />
-                                        {errors.nome && touched.nome && errors.nome &&
-                                            <span className="span_erro text-danger mt-1"> {errors.nome} </span>
+                                        {errors.rg && touched.rg && errors.rg &&
+                                            <span className="span_erro text-danger mt-1"> {errors.rg} </span>
                                         }
                                     </div>
 
@@ -179,7 +191,8 @@ export const FuncionarioForm = () => {
 
                                 <div className='row'>
                                     <div className='col-md-4 mt-3'>
-                                        <label htmlFor="data_de_nascimento" className="form-label">Data de nascimento</label>
+                                        <label htmlFor="data_de_nascimento" className="form-label">Data de
+                                            nascimento</label>
                                         <DatePickerField
                                             name="data_de_nascimento"
                                             id="data_de_nascimento"
@@ -227,7 +240,8 @@ export const FuncionarioForm = () => {
                                 <div className='row'>
 
                                     <div className='col-md-3 mt-3'>
-                                        <label htmlFor="tipo_logradouro" className="form-label">Tipo de Logradouro</label>
+                                        <label htmlFor="tipo_logradouro" className="form-label">Tipo de
+                                            Logradouro</label>
                                         <input
                                             type="text"
                                             name="tipo_logradouro"
@@ -304,7 +318,7 @@ export const FuncionarioForm = () => {
                                     <div className='col-md-3 mt-3'>
                                         <label htmlFor="cep" className="form-label">CEP</label>
                                         <MaskedInput
-                                            mask = {[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
+                                            mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                                             type="text"
                                             value={values.cep}
                                             name="cep"
@@ -319,7 +333,7 @@ export const FuncionarioForm = () => {
                                     <div className='col-md-3 mt-3'>
                                         <label htmlFor="telefone" className="form-label">Telefone</label>
                                         <MaskedInput
-                                            mask = {['(', /\d/, /\d/, ')', /\d/, /\d/,/\d/, /\d/,/\d/, /\d/,/\d/, /\d/,/\d/]}
+                                            mask={['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
                                             type="text"
                                             value={values.telefone}
                                             name="telefone"
@@ -346,6 +360,16 @@ export const FuncionarioForm = () => {
                                         />
                                     </div>
                                 </div>
+
+                                <Dependentes
+                                    values={values}
+                                    handleChange={handleChange}
+                                    setFieldValue={setFieldValue}
+                                    errors={errors}
+                                    touched={touched}
+                                />
+
+
                                 <div className='row'>
                                     <div className='d-flex justify-content-end pb-3 mt-3'>
                                         <Link to="/funcionarios" state={{origem: 'edicao'}}>
