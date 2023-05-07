@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import formCriarUsuario from "../../services/criarUsuario/formCriarUsuario";
 import Loading from "../loading";
 import {ModalErro} from "../modalBootstrap/ModalErro";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export const CriarUsuarioForm = () => {
 
@@ -53,6 +53,7 @@ export const CriarUsuarioForm = () => {
                                 required
                                 onChange={e => setUsername(e.target.value)}
                             />
+                            <p className='fonte-12'>Informe um nome de usuário válido. Este valor pode conter apenas letras, números e os seguintes caracteres @ . + - _ </p>
                         </div>
                         <div className="form-group mt-3">
                             <label>Email</label>
@@ -70,7 +71,7 @@ export const CriarUsuarioForm = () => {
                             <label>Senha</label>
                             <input
                                 name='password'
-                                type="text"
+                                type="password"
                                 className="form-control mt-1"
                                 placeholder="Senha"
                                 value={password1}
@@ -82,7 +83,7 @@ export const CriarUsuarioForm = () => {
                             <label>Repita a senha</label>
                             <input
                                 name='password2'
-                                type="text"
+                                type="password"
                                 className="form-control mt-1"
                                 placeholder="Repita a senha"
                                 value={password2}
@@ -95,6 +96,9 @@ export const CriarUsuarioForm = () => {
                                 Criar usuário
                             </button>
                         </div>
+                        <p className='mt-3'>
+                            <strong><Link to='/login'>Ou faça seu login</Link> </strong>
+                        </p>
                     </div>
 
                     <section>

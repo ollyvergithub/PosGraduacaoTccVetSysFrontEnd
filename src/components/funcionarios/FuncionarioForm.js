@@ -123,7 +123,7 @@ export const FuncionarioForm = () => {
                 ) :
 
                 <div className='container mb-3'>
-                    <h5 className='mb-0'>Cadastro de Clientes</h5>
+                    <h5 className='mb-0'>Cadastro de Funcionários</h5>
                     <Formik
                         initialValues={initalState}
                         onSubmit={handleSubmit}

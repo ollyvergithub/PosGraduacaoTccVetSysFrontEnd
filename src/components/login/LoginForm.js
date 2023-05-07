@@ -56,7 +56,7 @@ export const LoginForm = () => {
                                 <label>Senha</label>
                                 <input
                                     name='password'
-                                    type="text"
+                                    type="password"
                                     className="form-control mt-1"
                                     placeholder="Entre com a senha"
                                     value={password}
@@ -71,10 +71,9 @@ export const LoginForm = () => {
                             </div>
                         </div>
                     </form>
-
                     <p className='mt-3'>
-                        <strong><Link to='/criar-usuario'> Ou crie seu usuário </Link> </strong></p>
-
+                        <strong><Link to='/criar-usuario'> Ou crie seu usuário </Link> </strong>
+                    </p>
                     <section>
                         <ModalErro
                             show={showExibeModalErro}
