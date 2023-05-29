@@ -22,6 +22,7 @@ import {Consultas} from "../components/consultas";
 import {CadastroDeConsultas} from "../components/consultas/Cadastro";
 import {EdicaoDeConsultas} from "../components/consultas/Edicao";
 import {EstatisticasConsultas} from "../components/estatisticas/consultas";
+import {PoliticaDePrivacidade} from "../components/politicaDePrivacidade";
 
 
 export const Rotas = () => {
@@ -34,6 +35,7 @@ export const Rotas = () => {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
                 <Route
                     path="/protected"
                     element={
